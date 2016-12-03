@@ -58,9 +58,9 @@ CaseNote is a web application inspired by Genius built using Ruby on Rails and R
 
 **Objective:** Tags may be added to Opinions
 
-### Phase 6: - Styling (1 day)
+### Phase 6: Styling (1 day)
 
-**objective:** Add infinite scroll to Notes Index
+**objective:** Create header, footer, and other styling features
 
 ### Bonus Features (TBD)
 - [ ] Search Opinions by case name, judge, and contents
