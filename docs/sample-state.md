@@ -1,3 +1,4 @@
+```js
 {
   currentUser: {
     id: 1,
@@ -8,9 +9,10 @@
   formErrors: {
     signUp: { errors: [] },
     logIn: { errors: [] },
-    annotate: { errors: [] },
+    opinion: { errors: [] },
+    annotation: { errors: [] },
+    suggestion: { errors: [] },
     comment: { errors: [] },
-    opinion: { errors: [] }
   },
 
   opinions: [
@@ -80,3 +82,5 @@
     }
   }
 }
+
+```
