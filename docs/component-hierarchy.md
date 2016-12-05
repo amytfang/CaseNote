@@ -54,4 +54,4 @@
 | "/opinions/:opinionID" | "OpinionDetailContainer" |
 | "/opinions/:opinionID/annotations/:annotationID" | "AnnotationContainer" |
 | "/opinions/:opinionId/annotations/new" | "AnnotationFormContainer" |
-| "/new-opinion" | "OpinionForm" |
+| "/new" | "OpinionFormContainer" |

@@ -57,8 +57,7 @@
         start: 45,
         end: 80
       }
-    },
-    tags: ["Civil Rights", "Warren Court"]
+    }
   }
 
   annotationDetail: {
