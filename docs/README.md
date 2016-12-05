@@ -11,13 +11,13 @@
 
 CaseNote is a web application inspired by Genius built using Ruby on Rails and React/Redux. By the end of Week 9, this app will, at a minimum, satisfy the following criteria with smooth, bug-free navigation, adequate seed data and sufficient CSS styling:
 
-- [ ] Hosting on Heroku
 - [ ] New account creation, login, and guest/demo login
+- [ ] Production README
+- [ ] Hosting on Heroku
 - [ ] Opinions
 - [ ] Annotations
 - [ ] Comments
 - [ ] Upvotes
-- [ ] Tags
 
 ## Design Docs
 * [View Wireframes][wireframes]
@@ -50,19 +50,17 @@ CaseNote is a web application inspired by Genius built using Ruby on Rails and R
 
 **Objective:** Comments belong to Opinions and Annotations and can be created, read, edited, and destroyed though the API
 
-### Phase 5: Upvotes (.5 days)
+### Phase 5: Upvotes (1 days)
 
 **Objective:** Annotations and Comments can be upvoted or downvoted by registered users
-
-### Phase 6: Tags (.5 days)
-
-**Objective:** Tags may be added to Opinions
 
 ### Phase 6: Styling (1 day)
 
 **objective:** Create header, footer, and other styling features
 
 ### Bonus Features (TBD)
+- [ ] Tags for Opinions
 - [ ] Search Opinions by case name, judge, and contents
 - [ ] User profiles
 - [ ] Complex styling of opinions to include footnotes and generation of links to related cases
+- [ ] Video/audio playback

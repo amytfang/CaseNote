@@ -2,8 +2,7 @@
 {
   currentUser: {
     id: 1,
-    username: "user1",
-    image_url: ""
+    username: "user1"
   },
 
   formErrors: {
@@ -36,7 +35,7 @@
     case: "Loving v. Virginia",
     citation: "388 U.S. 1",
     date: "June 12, 1967",
-    author: "Warren",
+    court: "U.S. Supreme Court",
     body: "This case presents a constitutional question never addressed by this Court: whether a statutory scheme adopted by the State of Virginia to prevent marriages between persons solely on the basis of racial classifications violates the Equal Protection and Due Process Clauses of the Fourteenth Amendment. For reasons which seem to us to reflect the central meaning of those constitutional commands, we conclude that these statutes cannot stand consistently with the Fourteenth Amendment. . . .",
     comments: {
       1: {
@@ -66,8 +65,8 @@
     id: 1,
     start: 34,
     end: 50,
-    user: "user3",
-    text: "we conclude that these statutes cannot stand consistently with the Fourteenth Amendment",
+    author: { id: 3, username: "user3" }
+    annotated_content: "we conclude that these statutes cannot stand consistently with the Fourteenth Amendment",
     body: "this is a landmark case",
     votes: 6,
     created: "1 hour ago"
