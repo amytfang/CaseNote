@@ -50,7 +50,7 @@ CaseNote is a web application inspired by Genius built using Ruby on Rails and R
 
 **Objective:** Comments belong to Opinions and Annotations and can be created, read, edited, and destroyed though the API
 
-### Phase 5: Upvotes (1 days)
+### Phase 5: Upvotes (1 day)
 
 **Objective:** Annotations and Comments can be upvoted or downvoted by registered users
 
