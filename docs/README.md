@@ -64,5 +64,5 @@ CaseNote is a web application inspired by Genius built using Ruby on Rails and R
 
 ### Bonus Features (TBD)
 - [ ] Search Opinions by case name, judge, and contents
+- [ ] User profiles
 - [ ] Complex styling of opinions to include footnotes and generation of links to related cases
-- [ ] Auto generated related opinions
