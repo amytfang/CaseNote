@@ -7,10 +7,8 @@ import Modal from 'react-modal';
 document.addEventListener('DOMContentLoaded', () => {
   let store;
   if (window.currentUser) {
-    // debugger
     store = configureStore({ currentUser: window.currentUser });
   } else {
-    // debugger
     store = configureStore();
   }
 
