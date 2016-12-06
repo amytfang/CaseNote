@@ -6,8 +6,8 @@
   },
 
   formErrors: {
-    signUp: { errors: [] },
-    logIn: { errors: [] },
+    signup: { errors: [] },
+    signin: { errors: [] },
     opinion: { errors: [] },
     annotation: { errors: [] },
     suggestion: { errors: [] },
