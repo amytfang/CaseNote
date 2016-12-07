@@ -4,7 +4,7 @@
 
 [Trello link][trello]
 
-[heroku]: http://www.heroku.com
+[heroku]: https://casenote.herokuapp.com/
 [trello]: https://trello.com/b/lP3W0MMC/casenote
 
 ## Minimum Viable Product
