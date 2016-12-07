@@ -1,4 +1,6 @@
 import React from 'react';
+import OpinionDetailHeader from './opinion_detail_header';
+import OpinionDetailBody from './opinion_detail_body';
 
 class OpinionDetail extends React.Component {
   componentDidMount() {
@@ -17,14 +19,8 @@ class OpinionDetail extends React.Component {
     } else {
       return (
         <main className="opinion-detail">
-
-          <h2>{ opinion.case }</h2>
-          <h3>{ opinion.citation }</h3>
-          <h4>{ opinion.court }</h4>
-          <h4>{ opinion.date }</h4>
-          <h4>{ opinion.judge }</h4>
-
-          <p>{ opinion.body }</p>
+          <OpinionDetailHeader opinion={ this.props.opinion }/>
+          <OpinionDetailBody text={ this.props.opinion.body } />
         </main>
       );
     }
