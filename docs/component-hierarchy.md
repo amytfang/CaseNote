@@ -47,8 +47,6 @@
 |Path   | Component   |
 |-------|-------------|
 | "/" | "AppContainer" |
-| "/sign-up" | "AuthFormContainer" |
-| "/sign-in" | "AuthFormContainer" |
 | "/home" | "HomeContainer" |
 | "/index" | "OpinionIndexContainer" |
 | "/opinions/:opinionID" | "OpinionDetailContainer" |
