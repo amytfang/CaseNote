@@ -4,6 +4,8 @@ import { Router, Route, hashHistory } from 'react-router';
 
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
+import OpinionIndexContainer from './opinions/opinion_index_container';
+import OpinionDetailContainer from './opinions/opinion_detail_container';
 
 // function _redirectIfLoggedIn(nextState, replace) {
 //   if(store.getState().currentUser) {
@@ -22,7 +24,8 @@ const Root = ({ store }) => (
   <Provider store={ store }>
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
-
+        <Route path="/index" component={OpinionIndexContainer} />
+        <Route path="/opinions/:opinionId" component={OpinionDetailContainer} />
       </Route>
     </Router>
   </Provider>
