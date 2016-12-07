@@ -20,11 +20,19 @@ class ModalSessionForm extends React.Component {
     return (e) => this.setState({ [field]: e.currentTarget.value });
   }
 
+  guestLogin() {
+    this.props
+      .signin({ username: "guest", password: "password"})
+      .then(() => this.props.modalOff());
+  }
+
   render() {
     const formType = this.props.formType;
     const formTitle = formType === 'signin' ? 'Sign In to' : 'Sign Up for';
 
     const errors = this.props.formErrors[formType].errors;
+
+    const guest = <a onClick={ this.guestLogin.bind(this) }>Login as Guest</a>;
 
     return(
       <div className="modal-session-form">
@@ -46,12 +54,14 @@ class ModalSessionForm extends React.Component {
           </input>
 
           <ul>
-            { errors.map((err) => <li>{ err }</li>) }
+            { errors.map((err, idx) => <li key={idx}>{ err }</li>) }
           </ul>
 
           <input type="submit" value={ formTitle.slice(0,8) }></input>
 
         </form>
+
+        { guest }
       </div>
     );
   }

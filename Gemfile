@@ -29,8 +29,15 @@ gem 'bcrypt', '~> 3.1.7'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-group :production do  
+group :production do
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
 end
 
 group :development, :test do
@@ -40,6 +47,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'annotate'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
