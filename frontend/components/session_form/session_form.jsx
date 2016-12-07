@@ -30,9 +30,8 @@ class SessionForm extends React.Component {
     const errors = this.props.formErrors[formType].errors;
 
     return(
-      <div>
+      <div className="session-form">
         <h2>{formTitle}</h2>
-        <span>or </span><Link to={ `/${linkURL}` }>{linkType}</Link>
         <form onSubmit={ this.handleSubmit }>
 
           <label>Username
@@ -60,7 +59,9 @@ class SessionForm extends React.Component {
           <br />
 
           <input type="submit" value={ formTitle }></input>
+
         </form>
+        <Link to={ `/${linkURL}` }>{linkType}</Link>
       </div>
     );
   }

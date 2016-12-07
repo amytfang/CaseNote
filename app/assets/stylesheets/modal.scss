@@ -1,0 +1,49 @@
+span.modal-close {
+    position: fixed;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+    color: #fff;
+    font-size: 36px;
+}
+
+.ReactModal__Overlay h2 {
+    color: #99a7ee;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #99a7ee;
+    margin-bottom: 10px;
+}
+
+.ReactModal__Overlay input {
+    margin: 5px 0px 10px 0px;
+    border: 2px solid #ccc;
+    width: 396px;
+    font-size: 16px;
+    padding: 5px;
+    background: #fff;
+}
+
+.ReactModal__Overlay input[type="submit"] {
+  width: auto;
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  text-align: center;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+
+.ReactModal__Overlay a {
+  color: #aaa;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-decoration: underline;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
