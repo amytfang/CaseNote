@@ -1,4 +1,4 @@
-import { RECEIVE_SIGNUP_ERRORS, RECEIVE_LOGIN_ERRORS } from '../actions/session_actions';
+import { RECEIVE_SIGNUP_ERRORS, RECEIVE_LOGIN_ERRORS, RECEIVE_CURRENT_USER } from '../actions/session_actions';
 
 const defaultState = {
   signup: { errors: [] },
@@ -19,6 +19,8 @@ const errorsReducer = (state = defaultState, action) => {
     case RECEIVE_SIGNUP_ERRORS:
       newState["signup"]["errors"] = action.errors;
       return newState;
+    case RECEIVE_CURRENT_USER:
+      return defaultState;
     default:
       return newState;
   }

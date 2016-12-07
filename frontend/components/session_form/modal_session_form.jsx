@@ -13,8 +13,7 @@ class ModalSessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.modalOff();
-    this.props.processForm(user);
+    this.props.processForm(user).then(() => this.props.modalOff());
   }
 
   handleChange(field) {
