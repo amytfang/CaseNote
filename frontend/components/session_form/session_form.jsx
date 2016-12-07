@@ -31,7 +31,8 @@ class SessionForm extends React.Component {
 
     return(
       <div className="session-form">
-        <h2>{formTitle}</h2>
+        <h2 className="signup-item"><Link to="/signup">Sign Up</Link></h2>
+        <h2 className="signup-item"><Link to="/signin">Sign In</Link></h2>
         <form onSubmit={ this.handleSubmit }>
 
           <label>Username
@@ -41,8 +42,6 @@ class SessionForm extends React.Component {
               onChange={this.handleChange("username")}>
             </input>
           </label>
-
-          <br />
 
           <label>Password
             <input type="password"
@@ -56,12 +55,9 @@ class SessionForm extends React.Component {
             { errors.map((err) => <li>{ err }</li>) }
           </ul>
 
-          <br />
-
           <input type="submit" value={ formTitle }></input>
 
         </form>
-        <Link to={ `/${linkURL}` }>{linkType}</Link>
       </div>
     );
   }
