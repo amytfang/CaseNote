@@ -47,3 +47,54 @@ span.modal-close {
   margin: 10px 0px;
   cursor: pointer;
 }
+
+.modal-session-form {
+  position: relative;
+}
+
+.username-error, .password-error {
+  position: absolute;
+  font-size: 14px;
+  padding: 5px;
+	background: #fff;
+	border: 2px solid red;
+  transform: translateY(-5px);
+  width: 170px;
+  right: 10px;
+}
+
+.username-error:after, .username-error:before, .password-error:after, .password-error:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.username-error:after, .password-error:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 5px;
+	margin-left: -5px;
+}
+
+.username-error:before, .password-error:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: red;
+	border-width: 7px;
+	margin-left: -7px;
+}
+
+.login-error {
+  position: absolute;
+  font-size: 14px;
+  padding: 5px;
+	background: #fff;
+	border: 2px solid red;
+  white-space: nowrap;
+  left: 100px;
+  bottom: 30px;
+}

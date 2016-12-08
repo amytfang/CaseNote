@@ -64,7 +64,7 @@ class Header extends React.Component {
         <ul className="header-nav">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/index">All Opinions</Link></li>
-          <li><a href="#">Add Opinion</a></li>
+          <li><Link to="/new">Add Opinion</Link></li>
         </ul>
 
         <Modal

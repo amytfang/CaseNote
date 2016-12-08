@@ -3,12 +3,12 @@ import { RECEIVE_ALL_OPINIONS, RECEIVE_SINGLE_OPINION, RECEIVE_OPINION_ERRORS } 
 import { merge } from 'lodash';
 
 const defaultState = {
-  signup: { errors: [] },
-  signin: { errors: [] },
-  opinion: { errors: [] },
-  annotation: { errors: [] },
-  suggestion: { errors: [] },
-  comment: { errors: [] },
+  signup: { },
+  signin: { },
+  opinion: { },
+  annotation: { },
+  suggestion: { },
+  comment: { },
 };
 
 const errorsReducer = (state = defaultState, action) => {
@@ -16,13 +16,13 @@ const errorsReducer = (state = defaultState, action) => {
   let newState = merge({}, state);
   switch(action.type) {
     case RECEIVE_LOGIN_ERRORS:
-      newState["signin"]["errors"] = action.errors;
+      newState["signin"] = action.errors;
       return newState;
     case RECEIVE_SIGNUP_ERRORS:
-      newState["signup"]["errors"] = action.errors;
+      newState["signup"] = action.errors;
       return newState;
     case RECEIVE_OPINION_ERRORS:
-      newState["opinion"]["errors"] = action.errors;
+      newState["opinion"] = action.errors;
       return newState;
     case RECEIVE_CURRENT_USER:
     case RECEIVE_ALL_OPINIONS:

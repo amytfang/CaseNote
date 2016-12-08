@@ -6,11 +6,11 @@ class Api::OpinionsController < ApplicationController
 
   def create
     @opinion = Opinion.new(opinion_params)
-    # @opinion.transcriber_id = current_user.id
+    @opinion.transcriber_id = current_user.id
     if @opinion.save
       render :show
     else
-      render json: @opinion.errors.full_messages, status: 422
+      render json: @opinion.errors.messages, status: 422
     end
   end
 
@@ -24,7 +24,7 @@ class Api::OpinionsController < ApplicationController
     if @opinion.update(opinion_params)
       render :show
     else
-      render json: @opinon.errors.full_messages, status: 422
+      render json: @opinon.errors.messages, status: 422
     end
   end
 
@@ -33,13 +33,13 @@ class Api::OpinionsController < ApplicationController
     if @opinion.destroy
       render :show
     else
-      render json: @opinion.errors.full_messages, status: 422
+      render json: @opinion.errors.messages, status: 422
     end
   end
 
   private
 
   def opinion_params
-    params.require(:opinion).permit(:case, :citation, :judge, :court, :date, :body, :transcriber_id)
+    params.require(:opinion).permit(:case, :citation, :judge, :court, :date, :body, :img_url)
   end
 end

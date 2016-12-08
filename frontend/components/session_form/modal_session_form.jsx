@@ -30,7 +30,14 @@ class ModalSessionForm extends React.Component {
     const formType = this.props.formType;
     const formTitle = formType === 'signin' ? 'Sign In to' : 'Sign Up for';
 
-    const errors = this.props.formErrors[formType].errors;
+    const errors = this.props.formErrors[formType];
+    const usernameErrors = (errors.username) ?
+      <div className="username-error">Username {errors.username[0]}</div> : null;
+    const passwordErrors = (errors.password) ?
+      <div className="password-error">Password {errors.password[0]}</div> : null;
+    const credentialErrors = (errors.login) ?
+      <div className="login-error">{errors.login[0]}</div> : null;
+
 
     const guest = <a onClick={ this.guestLogin.bind(this) }>Login as Guest</a>;
 
@@ -44,6 +51,7 @@ class ModalSessionForm extends React.Component {
             value={this.state.username}
             onChange={this.handleChange("username")}>
           </input>
+          { usernameErrors }
 
           <br />
 
@@ -52,13 +60,12 @@ class ModalSessionForm extends React.Component {
             value={this.state.password}
             onChange={this.handleChange("password")}>
           </input>
+          { passwordErrors }
 
-          <ul>
-            { errors.map((err, idx) => <li key={idx}>{ err }</li>) }
-          </ul>
 
           <input type="submit" value={ formTitle.slice(0,8) }></input>
 
+          { credentialErrors }
         </form>
 
         { guest }
