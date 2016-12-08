@@ -1,0 +1,94 @@
+.opinion-create-page {
+  background-color: #000;
+}
+
+.opinion-create-form {
+  width: 1000px;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.opinion-create-form-header {
+  border-bottom: 1px solid #565656;
+  padding: 20px 0px 5px 0px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.opinion-create-form-header h2 {
+  font-size: 36px;
+  font-weight: 600;
+  width: auto;
+}
+
+.opinion-create-form-header div {
+  vertical-align: bottom;
+  text-align: right;
+  width: auto;
+}
+
+.opinion-create-form-fields {
+  padding: 20px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.opinion-create-form-fields label {
+  width: 475px;
+  height: 60px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #565656;
+  margin-bottom: 10px;
+}
+
+.opinion-create-form-fields label input {
+  margin-top: 5px;
+  width: 465px;
+  background-color: #eee;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.opinion-create-form-fields label input[type="date"] {
+  padding-top: 0;
+}
+
+.opinion-create-form-fields .opinion-create-form-textarea {
+  width: 980px;
+  height: 500px;
+  padding-bottom: 20px;
+}
+
+.opinion-create-form-fields .opinion-create-form-textarea textarea {
+  width: 970px;
+  height: 450px;
+  border-radius: 3px;
+  margin-top: 5px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.opinion-create-form-submit {
+  display: block;
+  border-top: 1px solid #565656;
+  padding: 20px 0px;
+}
+
+.opinion-create-form-submit button {
+  border-radius: 2px;
+  font: inherit;
+  border: 1px solid #565656;
+  background: #353535;
+  color: #ccc;
+  padding: 5px 10px;
+  cursor: pointer
+}
+
+.opinion-create-form-submit button:hover {
+  background: #4f4f4f;
+}

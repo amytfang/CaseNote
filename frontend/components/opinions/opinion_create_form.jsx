@@ -30,66 +30,75 @@ class OpinionCreateForm extends React.Component {
 
   render() {
     return(
-      <section className="opinion-create-form">
-        <h2>Add Opinion</h2>
-        <form onSubmit={ this.handleSubmit }>
-          <label>Case
-            <input
-              type="text"
-              value={ this.state.case }
-              placeholder="Case"
-              onChange={ this.update('case') }/>
-          </label>
+      <div className="opinion-create-page">
+        <section className="opinion-create-form">
+          <header className="opinion-create-form-header group">
+            <h2>Add Opinion</h2>
+            <div>* required</div>
+          </header>
+          <form onSubmit={ this.handleSubmit }>
+            <div className="opinion-create-form-fields">
+              <label>Case *
+                <input
+                  type="text"
+                  value={ this.state.case }
+                  placeholder="Case"
+                  onChange={ this.update('case') }/>
+              </label>
 
-          <label>Citation
-            <input
-              type="text"
-              value={ this.state.citation }
-              placeholder="Citation"
-              onChange={ this.update('citation') }/>
-          </label>
+              <label>Citation *
+                <input
+                  type="text"
+                  value={ this.state.citation }
+                  placeholder="Citation"
+                  onChange={ this.update('citation') }/>
+              </label>
 
-          <label>Court
-            <input
-              type="text"
-              value={ this.state.court }
-              placeholder="Court"
-              onChange={ this.update('court') }/>
-          </label>
+              <label>Court *
+                <input
+                  type="text"
+                  value={ this.state.court }
+                  placeholder="Court"
+                  onChange={ this.update('court') }/>
+              </label>
 
-          <label>Judge
-            <input
-              type="text"
-              value={ this.state.judge }
-              placeholder="Judge"
-              onChange={ this.update('judge') }/>
-          </label>
+              <label>Judge *
+                <input
+                  type="text"
+                  value={ this.state.judge }
+                  placeholder="Judge"
+                  onChange={ this.update('judge') }/>
+              </label>
 
-          <label>Date
-            <input
-              type="date"
-              value={ this.state.date }
-              onChange={ this.update('date') }/>
-          </label>
+              <label>Date *
+                <input
+                  type="date"
+                  value={ this.state.date }
+                  onChange={ this.update('date') }/>
+              </label>
 
-          <label>Image URL
-            <input
-              type="text"
-              value={ this.state.img_url }
-              placeholder="Image URL"
-              onChange={ this.update('img_url') }/>
-          </label>
+              <label>Image URL
+                <input
+                  type="text"
+                  value={ this.state.img_url }
+                  placeholder="Image URL"
+                  onChange={ this.update('img_url') }/>
+              </label>
 
-          <label>Body
-            <textarea
-              value={ this.state.body }
-              placeholder="Text Body"
-              onChange={ this.update('body')} />
-          </label>
+              <label className="opinion-create-form-textarea group">Body*
+                <textarea
+                  value={ this.state.body }
+                  placeholder="Text Body"
+                  onChange={ this.update('body')} />
+              </label>
+            </div>
 
-          <button>Submit</button>
-        </form>
-      </section>
+            <div className="opinion-create-form-submit">
+              <button>Submit</button>
+            </div>
+          </form>
+        </section>
+      </div>
     );
   }
 }

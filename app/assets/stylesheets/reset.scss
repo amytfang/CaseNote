@@ -26,7 +26,7 @@ img {
   height: auto;
 }
 
-.group {
+.group:after {
   content: "";
   clear: both;
   display: block;
