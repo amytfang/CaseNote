@@ -20,7 +20,7 @@ class OpinionDetail extends React.Component {
       return (
         <main className="opinion-detail">
           <OpinionDetailHeader opinion={ this.props.opinion }/>
-          <OpinionDetailBody text={ this.props.opinion.body } />
+          <OpinionDetailBody opinion={ this.props.opinion } />
         </main>
       );
     }

@@ -8,6 +8,7 @@ class ModalSessionForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.guestLogin = this.guestLogin.bind(this);
   }
 
   handleSubmit(e) {
@@ -28,18 +29,23 @@ class ModalSessionForm extends React.Component {
 
   render() {
     const formType = this.props.formType;
-    const formTitle = formType === 'signin' ? 'Sign In to' : 'Sign Up for';
+    const formTitle = formType === 'signin' ?
+      'Sign In to' : 'Sign Up for';
 
     const errors = this.props.formErrors[formType];
     const usernameErrors = (errors.username) ?
-      <div className="username-error">Username {errors.username[0]}</div> : null;
+      <div className="username-error">
+        Username { errors.username[0] }
+      </div> : null;
     const passwordErrors = (errors.password) ?
-      <div className="password-error">Password {errors.password[0]}</div> : null;
+      <div className="password-error">
+        Password { errors.password[0] }
+      </div> : null;
     const credentialErrors = (errors.login) ?
-      <div className="login-error">{errors.login[0]}</div> : null;
+      <div className="login-error">{ errors.login[0] }</div> : null;
 
 
-    const guest = <a onClick={ this.guestLogin.bind(this) }>Login as Guest</a>;
+    const guest = <a onClick={ this.guestLogin }>Login as Guest</a>;
 
     return(
       <div className="modal-session-form">

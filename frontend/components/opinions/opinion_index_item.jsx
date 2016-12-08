@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 export const OpinionIndexItem = ({opinion}) => {
   return(
-    <li>
+    <li className="opinion-index-item">
       <Link to={`/opinions/${opinion.id}`}>
         {opinion.case},
         {opinion.citation},

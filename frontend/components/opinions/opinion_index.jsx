@@ -10,6 +10,7 @@ class OpinionIndex extends React.Component {
     if (this.props.opinions.length === 0) return null;
     return (
       <section className="opinions-index">
+        <h3>Opinions</h3>
         <ul>
           { this.props.opinions.map((op) =>
             <OpinionIndexItem key={op.id} opinion={op} />

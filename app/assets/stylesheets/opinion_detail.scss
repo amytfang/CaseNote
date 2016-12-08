@@ -1,0 +1,43 @@
+.opinion-detail-header {
+  height: 280px;
+  background-color: #aaa;
+}
+
+.opinion-detail-header-info {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 36px 0px 24px 0px;
+}
+
+.opinion-detail-header-info h2 {
+  color: #ffff64;
+  width: 550px;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.opinion-detail-header-info h3 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 0px;
+}
+
+.opinion-detail-header-info h4 {
+  color: #404040;
+  font-size: 16px;
+}
+
+.opinion-detail-main {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.opinion-detail-main-body {
+  width: 540px;
+  font-size: 20px;
+  line-height: 1.6;
+}
