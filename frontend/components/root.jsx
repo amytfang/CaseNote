@@ -5,6 +5,7 @@ import { Router, Route, hashHistory } from 'react-router';
 import App from './app';
 import SessionFormContainer from './session_form/session_form_container';
 import OpinionIndexContainer from './opinions/opinion_index_container';
+import OpinionCreateFormContainer from './opinions/opinion_create_form_container';
 import OpinionDetailContainer from './opinions/opinion_detail_container';
 
 // function _redirectIfLoggedIn(nextState, replace) {
@@ -25,6 +26,7 @@ const Root = ({ store }) => (
     <Router history={ hashHistory }>
       <Route path="/" component={ App }>
         <Route path="/index" component={OpinionIndexContainer} />
+        <Route path="/new" component={OpinionCreateFormContainer} />
         <Route path="/opinions/:opinionId" component={OpinionDetailContainer} />
       </Route>
     </Router>
