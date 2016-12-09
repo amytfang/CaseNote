@@ -4,6 +4,6 @@
     json.court opinion.court.name
     json.full_citation opinion.citation_format
     image = opinion.use_image
-    json.thumb image.url(:small)
+    json.thumb image.url(:thumb)
   end
 end

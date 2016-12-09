@@ -12,8 +12,8 @@ class OpinionIndex extends React.Component {
       <section className="opinions-index">
         <h3>Opinions</h3>
         <ul>
-          { this.props.opinions.map((op) =>
-            <OpinionIndexItem key={op.id} opinion={op} />
+          { this.props.opinions.map((op, idx) =>
+            <OpinionIndexItem key={op.id} opinion={op} index={idx}/>
           )}
         </ul>
       </section>

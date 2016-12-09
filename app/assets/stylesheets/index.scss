@@ -1,5 +1,5 @@
 .opinions-index {
-  width: 900px;
+  max-width: 900px;
   margin: 0 auto;
   display: block;
 }
@@ -9,5 +9,44 @@
   padding: 15px 0px;
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 3px solid #000;
+  border-bottom: 4px solid #000;
+}
+
+.opinion-index-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.opinion-index-item a div {
+  font-weight: 700;
+  float: left;
+  font-size: 24px;
+  padding: 10px 16px;
+  margin: 15px;
+  border-radius: 50%;
+  border: 4px solid #000;
+}
+
+.opinion-index-item img {
+  float: left;
+  height: 87px;
+  width: 87px;
+  object-fit: cover;
+}
+
+.opinion-index-item .cite {
+  border: 0;
+  padding: 18px;
+  margin: 0;
+
+}
+
+.opinion-index-item .full-cite {
+  font-weight: 700;
+  font-size: 24px;
+  display: block;
+}
+
+.opinion-index-item .court-cite {
+  font-size: 18px;
+  display: block;
 }
