@@ -10,4 +10,7 @@
 #
 
 class Court < ActiveRecord::Base
+  validates :name, :citation, presence: true
+  has_many :opinions
+
 end

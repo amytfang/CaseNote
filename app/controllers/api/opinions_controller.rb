@@ -40,6 +40,6 @@ class Api::OpinionsController < ApplicationController
   private
 
   def opinion_params
-    params.require(:opinion).permit(:case, :citation, :judge, :court, :date, :body, :img_url)
+    params.require(:opinion).permit(:case, :citation, :judge_id, :court, :date, :body, :img_url)
   end
 end
