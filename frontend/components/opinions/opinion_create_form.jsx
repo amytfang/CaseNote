@@ -1,4 +1,5 @@
 import React from 'react';
+import Quill from 'quill';
 
 class OpinionCreateForm extends React.Component {
   constructor(props) {
@@ -6,14 +7,22 @@ class OpinionCreateForm extends React.Component {
     this.state = {
       case: "",
       citation: "",
-      court: "",
+      court: 1,
       date: "",
-      judge: "",
+      judge_id: 1,
       body: "",
       img_url: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    const quill = new Quill('#editor');
+    quill.on('text-change', () => {
+      let text = quill.getText();
+      this.setState({ body: text });
+    });
   }
 
   handleSubmit(e) {
@@ -66,9 +75,8 @@ class OpinionCreateForm extends React.Component {
               <label>Judge *
                 <input
                   type="text"
-                  value={ this.state.judge }
                   placeholder="Judge"
-                  onChange={ this.update('judge') }/>
+                   />
               </label>
 
               <label>Date *
@@ -86,12 +94,12 @@ class OpinionCreateForm extends React.Component {
                   onChange={ this.update('img_url') }/>
               </label>
 
-              <label className="opinion-create-form-textarea">Body *
-                <textarea
-                  value={ this.state.body }
-                  placeholder="Text Body"
-                  onChange={ this.update('body')} />
+              <label className="opinion-create-form-editor">Body
+                <div id="editor">
+                  <p>Enter Opinion text </p>
+                </div>
               </label>
+
             </div>
 
             <div className="opinion-create-form-submit">
@@ -103,5 +111,12 @@ class OpinionCreateForm extends React.Component {
     );
   }
 }
+
+// <label className="opinion-create-form-textarea">Body *
+//   <textarea
+//     value={ this.state.body }
+//     placeholder="Text Body"
+//     onChange={ this.update('body')} />
+// </label>
 
 export default OpinionCreateForm;

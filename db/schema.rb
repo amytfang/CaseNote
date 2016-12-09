@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209035027) do
+ActiveRecord::Schema.define(version: 20161209160536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,18 +34,25 @@ ActiveRecord::Schema.define(version: 20161209035027) do
   end
 
   create_table "opinions", force: :cascade do |t|
-    t.string   "case",           null: false
-    t.string   "citation",       null: false
-    t.string   "court",          null: false
-    t.date     "date",           null: false
-    t.text     "body",           null: false
-    t.integer  "transcriber_id", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "judge_id",       null: false
+    t.string   "case",               null: false
+    t.string   "citation",           null: false
+    t.date     "date",               null: false
+    t.text     "body",               null: false
+    t.integer  "transcriber_id",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "judge_id",           null: false
+    t.integer  "court_id",           null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
+  add_index "opinions", ["case"], name: "index_opinions_on_case", using: :btree
   add_index "opinions", ["citation"], name: "index_opinions_on_citation", unique: true, using: :btree
+  add_index "opinions", ["court_id"], name: "index_opinions_on_court_id", using: :btree
+  add_index "opinions", ["judge_id"], name: "index_opinions_on_judge_id", using: :btree
   add_index "opinions", ["transcriber_id"], name: "index_opinions_on_transcriber_id", using: :btree
 
   create_table "users", force: :cascade do |t|
