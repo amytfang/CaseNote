@@ -11,22 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207154724) do
+ActiveRecord::Schema.define(version: 20161209035027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "courts", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "citation",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "judges", force: :cascade do |t|
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "name",               null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
   create_table "opinions", force: :cascade do |t|
     t.string   "case",           null: false
     t.string   "citation",       null: false
-    t.string   "judge",          null: false
     t.string   "court",          null: false
     t.date     "date",           null: false
     t.text     "body",           null: false
     t.integer  "transcriber_id", null: false
-    t.string   "img_url"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "judge_id",       null: false
   end
 
   add_index "opinions", ["citation"], name: "index_opinions_on_citation", unique: true, using: :btree

@@ -3,7 +3,7 @@
 }
 
 .opinion-create-form {
-  width: 1000px;
+  max-width: 1000px;
   margin: 0 auto;
   color: #fff;
 }
@@ -12,6 +12,8 @@
   border-bottom: 1px solid #565656;
   padding: 20px 0px 5px 0px;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
 }
@@ -19,13 +21,13 @@
 .opinion-create-form-header h2 {
   font-size: 36px;
   font-weight: 600;
-  width: auto;
+
 }
 
 .opinion-create-form-header div {
   vertical-align: bottom;
   text-align: right;
-  width: auto;
+
 }
 
 .opinion-create-form-fields {

@@ -9,8 +9,8 @@ class OpinionCreateForm extends React.Component {
       court: "",
       date: "",
       judge: "",
-      img_url: "",
-      body: ""
+      body: "",
+      img_url: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +19,9 @@ class OpinionCreateForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const opinion = Object.assign({}, this.state);
+    if (opinion.img_url === "") delete opinion.img_url;
     this.props.createOpinion(opinion).then(
-      (op) => this.props.router.push(`/opinions/${op.id}`)
+      (op) => this.props.router.push(`/opinions/${op.opinion.id}`)
     );
   }
 
@@ -85,7 +86,7 @@ class OpinionCreateForm extends React.Component {
                   onChange={ this.update('img_url') }/>
               </label>
 
-              <label className="opinion-create-form-textarea group">Body*
+              <label className="opinion-create-form-textarea">Body *
                 <textarea
                   value={ this.state.body }
                   placeholder="Text Body"

@@ -1,12 +1,17 @@
 .opinion-detail-header {
   height: 280px;
   background-color: #aaa;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
 .opinion-detail-header-info {
   width: 1000px;
   margin: 0 auto;
   padding: 36px 0px 24px 0px;
+  position: relative;
+  z-index: 1
 }
 
 .opinion-detail-header-info h2 {

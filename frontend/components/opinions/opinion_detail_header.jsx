@@ -2,8 +2,11 @@ import React from 'react';
 
 const OpinionDetailHeader = (props) => {
   const { opinion } = props;
+  const divStyle = {
+    backgroundImage: `url()`
+  };
   return(
-    <div className="opinion-detail-header">
+    <div style={ divStyle } className="opinion-detail-header gradient">
       <section className="opinion-detail-header-info">
         <h2>{opinion.case}</h2>
         <h3>{opinion.citation}</h3>
