@@ -3,7 +3,7 @@ import React from 'react';
 const OpinionDetailHeader = (props) => {
   const { opinion } = props;
   const divStyle = {
-    backgroundImage: `url()`
+    backgroundImage: `url(${opinion.image_url})`
   };
   return(
     <div style={ divStyle } className="opinion-detail-header gradient">

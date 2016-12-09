@@ -1,6 +1,7 @@
 import React from 'react';
 import OpinionDetailHeader from './opinion_detail_header';
 import OpinionDetailBody from './opinion_detail_body';
+import OpinionDetailPanel from './opinion_detail_panel';
 
 class OpinionDetail extends React.Component {
   componentDidMount() {

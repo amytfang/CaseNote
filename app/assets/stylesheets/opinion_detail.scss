@@ -29,14 +29,17 @@
 }
 
 .opinion-detail-header-info h4 {
-  color: #404040;
+  color: #aaa;
   font-size: 16px;
+  margin-bottom: 2px;
 }
 
 .opinion-detail-main {
-  width: 1000px;
+  max-width: 960px;
+  min-height: 250px;
   margin: 0 auto;
   display: flex;
+
   padding: 20px;
   background-color: #fff;
 }
@@ -45,4 +48,25 @@
   width: 540px;
   font-size: 20px;
   line-height: 1.6;
+}
+
+.opinion-detail-main-panel {
+  width: 400px;
+  padding-left: 20px;
+  position: relative;
+  display: flex
+}
+
+.opinion-detail-main-panel-img {
+  position: absolute;
+  top: -220px;
+  max-width: 339px;
+  max-height: 339px;
+  border: 1px solid #fff;
+  overflow: hidden;
+}
+
+.opinion-detail-main-panel-img img {
+  max-width: 100%;
+  max-height: 100%;
 }
