@@ -28,7 +28,7 @@ class OpinionCreateForm extends React.Component {
 
     const quill = new Quill('#editor', options);
     quill.on('text-change', () => {
-      let text = quill.container.children[0].innerHTML;
+      let text = JSON.stringify(quill.getContents());
       this.setState({ body: text });
     });
 
@@ -70,8 +70,6 @@ class OpinionCreateForm extends React.Component {
 
 
   render() {
-
-
     return(
       <div className="opinion-create-page">
         <section className="opinion-create-form">
@@ -144,7 +142,7 @@ class OpinionCreateForm extends React.Component {
                   onChange={ this.update('image') }/>
               </label>
 
-              <label className="opinion-create-form-editor">Body * 
+              <label className="opinion-create-form-editor">Body *
                 <div id="editor">
                 </div>
               </label>

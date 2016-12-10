@@ -14,10 +14,10 @@ class OpinionDetailBody extends React.Component{
   }
 
   componentDidMount() {
-    this.quill = new Quill('#edit-editor');
-    this.quill.setText(this.props.opinion.body);
-    this.quill.enable(false);
     $(".hidden-edit-button").hide();
+    this.quill = new Quill('#edit-editor');
+    this.quill.setContents(JSON.parse(this.props.opinion.body));
+    this.quill.enable(false);
   }
 
   showEditForm() {
@@ -31,16 +31,16 @@ class OpinionDetailBody extends React.Component{
     $(".opinion-detail-main-body").removeClass("edit-mode");
     $(".hidden-edit-button").hide();
     $(".unhidden-button").show();
-    this.quill.setText(this.props.opinion.body);
+    this.quill.setContents(JSON.parse(this.props.opinion.body));
     this.quill.enable(false);
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const body = this.quill.getText();
+    const body = JSON.stringify(this.quill.getContents());
     this.props.editOpinion({ body, id: this.props.opinion.id }).then(
       (op) => {
-        this.quill.setText(op.opinion.body);
+        this.quill.setContents(JSON.parse(op.opinion.body));
         this.hideEditForm();
       });
   }
