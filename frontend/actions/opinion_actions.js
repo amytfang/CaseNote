@@ -48,7 +48,7 @@ export function createOpinion(opinion) {
 
 export function editOpinion(opinion) {
   return (dispatch) => {
-    return APIUtil.createOpinion(opinion).then(
+    return APIUtil.editOpinion(opinion).then(
       (op) => dispatch(receiveSingleOpinion(op)),
       (errors) => dispatch(receiveOpinionErrors(errors.responseJSON))
     );

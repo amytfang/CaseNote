@@ -59,7 +59,7 @@
 
 .opinion-detail-main-panel-img {
   position: absolute;
-  top: -220px;
+  top: -280px;
   max-width: 339px;
   max-height: 339px;
   border: 1px solid #fff;
@@ -69,4 +69,24 @@
 .opinion-detail-main-panel-img img {
   max-width: 100%;
   max-height: 100%;
+}
+
+.opinion-detail-main-body.edit-mode {
+  border: 1px solid #ccc;
+  padding: 5px;
+  background-color: rgba(204, 204, 204, 0.2);
+  margin-bottom: 20px;
+}
+
+.opinion-detail-main button {
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #000;
+  color: #000;
+  padding: 4px 8px;
+  cursor: pointer;
+  background: #fff;
+  margin-right: 10px;
+
 }

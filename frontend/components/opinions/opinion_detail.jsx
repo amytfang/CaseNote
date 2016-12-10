@@ -1,6 +1,6 @@
 import React from 'react';
 import OpinionDetailHeader from './opinion_detail_header';
-import OpinionDetailBody from './opinion_detail_body';
+import OpinionDetailBodyContainer from './opinion_detail_body_container';
 import OpinionDetailPanel from './opinion_detail_panel';
 
 class OpinionDetail extends React.Component {
@@ -21,7 +21,7 @@ class OpinionDetail extends React.Component {
       return (
         <main className="opinion-detail">
           <OpinionDetailHeader opinion={ this.props.opinion }/>
-          <OpinionDetailBody opinion={ this.props.opinion } />
+          <OpinionDetailBodyContainer />
         </main>
       );
     }
