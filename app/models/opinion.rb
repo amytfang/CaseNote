@@ -40,7 +40,7 @@ class Opinion < ActiveRecord::Base
     if self.image.url == default_url
       judge.image.url == default_url ? self.image : judge.image
     else
-      self.image.url
+      self.image
     end
   end
 

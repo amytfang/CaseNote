@@ -6,6 +6,7 @@ class Api::OpinionsController < ApplicationController
 
   def create
     @opinion = Opinion.new(opinion_params)
+    @opinion.image = URI.parse(opinion_params[:image]) if opinion_params[:image]
     @opinion.transcriber_id = current_user.id
     if @opinion.save
       render :show
@@ -40,6 +41,6 @@ class Api::OpinionsController < ApplicationController
   private
 
   def opinion_params
-    params.require(:opinion).permit(:case, :citation, :judge_id, :court, :date, :body, :img_url)
+    params.require(:opinion).permit(:case, :citation, :judge_id, :court_id, :date, :body, :image)
   end
 end
