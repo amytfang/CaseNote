@@ -27,7 +27,6 @@
 .opinion-create-form-header div {
   vertical-align: bottom;
   text-align: right;
-
 }
 
 .opinion-create-form-fields {
@@ -45,6 +44,7 @@
   text-transform: uppercase;
   color: #565656;
   margin-bottom: 10px;
+  position: relative;
 }
 
 .opinion-create-form-fields label input {
@@ -85,8 +85,6 @@
   background-color: #fff;
 }
 
-
-
 .opinion-create-form-submit {
   display: block;
   border-top: 1px solid #565656;
@@ -105,4 +103,41 @@
 
 .opinion-create-form-submit button:hover {
   background: #4f4f4f;
+}
+
+.create-form-errors {
+  text-transform: none;
+  position: absolute;
+  font-size: 14px;
+  padding: 5px;
+	background: #fff;
+	border: 2px solid red;
+  transform: translateY(-5px);
+  width: 170px;
+  right: 10px;
+}
+
+.create-form-errors:after, .create-form-errors:before  {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.create-form-errors:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 5px;
+	margin-left: -5px;
+}
+
+.create-form-errors:before {
+	border-color: rgba(204, 204, 204, 0);
+	border-bottom-color: red;
+	border-width: 7px;
+	margin-left: -7px;
 }

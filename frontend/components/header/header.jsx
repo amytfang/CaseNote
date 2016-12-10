@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import Modal from 'react-modal';
 import ModalStyle from './modal_style';
 import ModalSessionFormContainer from '../session_form/modal_session_form_container';
@@ -11,6 +11,7 @@ class Header extends React.Component {
     this.state = { modalOn: false, formType: null };
     this.handleSessionClick = this.handleSessionClick.bind(this);
     this.modalOff = this.modalOff.bind(this);
+    this.checkLoggedIn = this.checkLoggedIn.bind(this);
   }
 
   handleSessionClick(e) {
@@ -24,6 +25,14 @@ class Header extends React.Component {
 
   changeFormType(newType) {
     this.setState({ formType: newType });
+  }
+
+  checkLoggedIn(e) {
+    if (this.props.currentUser) {
+      this.props.router.push("/new");
+    } else {
+      this.setState({ modalOn: true, formType: "signin"});
+    }
   }
 
   render() {
@@ -64,7 +73,7 @@ class Header extends React.Component {
         <ul className="header-nav">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/index">All Opinions</Link></li>
-          <li><Link to="/new">Add Opinion</Link></li>
+          <li><Link onClick={ this.checkLoggedIn }>Add Opinion</Link></li>
         </ul>
 
         <Modal
@@ -87,4 +96,4 @@ class Header extends React.Component {
 }
 
 
-export default Header;
+export default withRouter(Header);

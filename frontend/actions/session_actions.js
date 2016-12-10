@@ -40,7 +40,10 @@ export function login(user) {
 export function logout() {
   return (dispatch) => {
     return APIUtil.logout().then(
-      () => dispatch(receiveCurrentUser(null)),
+      () => {
+        dispatch(receiveCurrentUser(null));
+        location.reload();
+      },
       (errors) => dispatch(receiveLoginErrors(errors.responseJSON))
     );
   };

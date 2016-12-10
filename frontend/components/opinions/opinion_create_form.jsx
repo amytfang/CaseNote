@@ -22,11 +22,7 @@ class OpinionCreateForm extends React.Component {
   componentDidMount() {
     const component = this;
 
-    const options = {
-      placeholder: 'Opinion Body',
-    };
-
-    const quill = new Quill('#editor', options);
+    const quill = new Quill('#editor');
     quill.on('text-change', () => {
       let text = JSON.stringify(quill.getContents());
       this.setState({ body: text });
@@ -59,6 +55,7 @@ class OpinionCreateForm extends React.Component {
     };
 
     if (opinion.image === "") delete opinion.image;
+
     this.props.createOpinion(opinion).then(
       (op) => this.props.router.push(`/opinions/${op.opinion.id}`)
     );
@@ -68,8 +65,38 @@ class OpinionCreateForm extends React.Component {
     return e => this.setState({ [property]: e.target.value });
   }
 
-
   render() {
+    const { errors } = this.props;
+
+    const bodyErrors = (errors.body) ?
+      <div className="body-error create-form-errors">
+        Body { errors.body[0] }
+      </div> : null;
+    const caseErrors = (errors.case) ?
+      <div className="case-error create-form-errors">
+        Case { errors.case[0] }
+      </div> : null;
+    const citationErrors = (errors.citation) ?
+      <div className="citation-error create-form-errors">
+        Citation { errors.citation[0] }
+      </div> : null;
+    const courtErrors = (errors.court) ?
+      <div className="court-error create-form-errors">
+        Court { errors.court[0] }
+      </div> : null;
+    const dateErrors = (errors.date) ?
+      <div className="date-error create-form-errors">
+        Date { errors.date[0] }
+      </div> : null;
+    const judgeErrors = (errors.judge) ?
+      <div className="judge-error create-form-errors">
+        Judge { errors.judge[0] }
+      </div> : null;
+    const imageErrors = (errors.image) ?
+      <div className="image-error create-form-errors">
+        Image { errors.image[0] }
+      </div> : null;
+
     return(
       <div className="opinion-create-page">
         <section className="opinion-create-form">
@@ -85,6 +112,7 @@ class OpinionCreateForm extends React.Component {
                   value={ this.state.case }
                   placeholder="Case"
                   onChange={ this.update('case') }/>
+                { caseErrors }
               </label>
 
               <label>Citation *
@@ -93,6 +121,7 @@ class OpinionCreateForm extends React.Component {
                   value={ this.state.citation }
                   placeholder="Citation"
                   onChange={ this.update('citation') }/>
+                { citationErrors }
               </label>
 
               <label>Court *
@@ -109,6 +138,7 @@ class OpinionCreateForm extends React.Component {
                     </option>
                   ))}
                 </select>
+                { courtErrors }
               </label>
 
               <label>Judge *
@@ -125,6 +155,7 @@ class OpinionCreateForm extends React.Component {
                     </option>
                   ))}
                 </select>
+                { judgeErrors }
               </label>
 
               <label>Date *
@@ -132,6 +163,7 @@ class OpinionCreateForm extends React.Component {
                   type="date"
                   value={ this.state.date }
                   onChange={ this.update('date') }/>
+                { dateErrors }
               </label>
 
               <label>Image URL
@@ -140,11 +172,13 @@ class OpinionCreateForm extends React.Component {
                   value={ this.state.image }
                   placeholder="Image URL"
                   onChange={ this.update('image') }/>
+                { imageErrors }
               </label>
 
               <label className="opinion-create-form-editor">Body *
                 <div id="editor">
                 </div>
+                { bodyErrors }
               </label>
 
             </div>
@@ -158,12 +192,5 @@ class OpinionCreateForm extends React.Component {
     );
   }
 }
-
-// <label className="opinion-create-form-textarea">Body *
-//   <textarea
-//     value={ this.state.body }
-//     placeholder="Text Body"
-//     onChange={ this.update('body')} />
-// </label>
 
 export default OpinionCreateForm;

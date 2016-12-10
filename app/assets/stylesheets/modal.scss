@@ -7,6 +7,11 @@ span.modal-close {
     font-size: 36px;
 }
 
+.ReactModal__Overlay {
+  position: relative;
+  z-index: 9;
+}
+
 .ReactModal__Overlay h2 {
     color: #99a7ee;
     text-transform: uppercase;
@@ -50,6 +55,7 @@ span.modal-close {
 
 .modal-session-form {
   position: relative;
+  z-index: 10;
 }
 
 .username-error, .password-error {
