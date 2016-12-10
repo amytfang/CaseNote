@@ -28,6 +28,8 @@ class Opinion < ActiveRecord::Base
     primary_key: :id,
     foreign_key: :transcriber_id
 
+  has_many :annotations
+
   has_attached_file :image, styles: { large: "600x600>", thumb: "100x100>" }, default_url: "https://s3.us-east-2.amazonaws.com/casenote-assets/default.jpg"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 

@@ -1,4 +1,6 @@
 class Api::OpinionsController < ApplicationController
+  before_action :check_logged_in, only: [:create, :update, :destroy]
+
   def index
     @opinions = Opinion.all
     render :index
@@ -7,7 +9,7 @@ class Api::OpinionsController < ApplicationController
   def create
     @opinion = Opinion.new(opinion_params)
     @opinion.image = URI.parse(opinion_params[:image]) if opinion_params[:image]
-    @opinion.transcriber_id = current_user.id
+    @opinion.transcriber_id = current_user.id if logged_in?
     if @opinion.save
       render :show
     else
@@ -32,7 +34,7 @@ class Api::OpinionsController < ApplicationController
   def destroy
     @opinion = Opinion.find(params[:id])
     if @opinion.destroy
-      render :show
+      render json: {}
     else
       render json: @opinion.errors.messages, status: 422
     end

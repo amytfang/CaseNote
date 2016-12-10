@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :opinions,
+    class_name: 'Opinion',
+    foreign_key: :transcriber_id,
+    primary_key: :id
+
+  has_many :annotations
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     user && user.is_password?(password) ? user : nil

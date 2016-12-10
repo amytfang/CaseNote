@@ -11,6 +11,7 @@ class OpinionDetailBody extends React.Component{
     this.hideEditForm = this.hideEditForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleSelection = this.handleSelection.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +19,7 @@ class OpinionDetailBody extends React.Component{
     this.quill = new Quill('#edit-editor');
     this.quill.setContents(JSON.parse(this.props.opinion.body));
     this.quill.enable(false);
+    this.quill.on("selection-change", this.handleSelection );
   }
 
   showEditForm() {
@@ -50,6 +52,19 @@ class OpinionDetailBody extends React.Component{
     this.props.deleteOpinion(this.props.opinion.id).then(
       () => this.props.router.push("/index")
     );
+  }
+
+  handleSelection(range, oldRange, source) {
+    // if (range) {
+    //   if (range.length === 0) {
+    //     console.log("Cursor");
+    //   } else {
+    //     let text = this.quill.getText(range.index, range.length);
+    //     console.log("User has highlighted", text);
+    //   }
+    // } else {
+    //   console.log("User is not in editor");
+    // }
   }
 
   render() {
@@ -85,7 +100,6 @@ class OpinionDetailBody extends React.Component{
     } else {
       loggedInButtons = null;
     }
-
 
     return(
       <main className="opinion-detail-main">

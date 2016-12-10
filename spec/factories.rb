@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :annotation do
+    
+  end
   factory :court do
     
   end
