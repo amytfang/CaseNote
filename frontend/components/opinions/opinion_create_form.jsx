@@ -144,10 +144,10 @@ class OpinionCreateForm extends React.Component {
                   onChange={ this.update('image') }/>
               </label>
 
-              <label>Body * </label>
+              <label className="opinion-create-form-editor">Body * 
                 <div id="editor">
                 </div>
-
+              </label>
 
             </div>
 
