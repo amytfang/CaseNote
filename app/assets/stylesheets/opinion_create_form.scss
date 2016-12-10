@@ -74,16 +74,18 @@
   padding-bottom: 20px;
 }
 
-.opinion-create-form-editor .ql-container {
+#editor {
+  display: block;
+  overflow:scroll;
+  height: 450px;
   border-radius: 3px;
   margin-top: 5px;
   padding: 5px;
   font-size: 16px;
   text-transform: none;
   background-color: #fff;
-  width: 970px;
-  height:450px;
 }
+
 
 
 .opinion-create-form-submit {
