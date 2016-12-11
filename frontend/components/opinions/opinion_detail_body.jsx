@@ -1,11 +1,18 @@
 import React from 'react';
 import OpinionDetailPanel from './opinion_detail_panel';
+import AnnotationFormContainer from '../annotations/annotation_form_container';
 import Quill from 'quill';
 import { withRouter } from 'react-router';
 
 class OpinionDetailBody extends React.Component{
   constructor(props) {
     super(props);
+
+    this.state = {
+      showAnnoPanel: false,
+      selectionRange: null,
+      selectionLocation: null
+     };
 
     this.showEditForm = this.showEditForm.bind(this);
     this.hideEditForm = this.hideEditForm.bind(this);
@@ -27,6 +34,7 @@ class OpinionDetailBody extends React.Component{
     $(".hidden-edit-button").show();
     $(".unhidden-button").hide();
     this.quill.enable(true);
+    this.quill.off("selection-change");
   }
 
   hideEditForm() {
@@ -35,6 +43,7 @@ class OpinionDetailBody extends React.Component{
     $(".unhidden-button").show();
     this.quill.setContents(JSON.parse(this.props.opinion.body));
     this.quill.enable(false);
+    this.quill.on("selection-change", this.handleSelection );
   }
 
   handleSubmit(e) {
@@ -55,21 +64,24 @@ class OpinionDetailBody extends React.Component{
   }
 
   handleSelection(range, oldRange, source) {
-    // if (range) {
-    //   if (range.length === 0) {
-    //     console.log("Cursor");
-    //   } else {
-    //     let text = this.quill.getText(range.index, range.length);
-    //     console.log("User has highlighted", text);
-    //   }
-    // } else {
-    //   console.log("User is not in editor");
-    // }
+    if (range && range.length !== 0) {
+      const location = this.quill.getBounds(range.index, range.length);
+      this.setState({
+        selectionRange: range,
+        selectionLocation: location,
+        showAnnoPanel: true
+      });
+    }
+    // else {
+    //   this.setState({
+    //     selectionRange: null,
+    //     selectionLocation: null,
+    //     showAnnoPanel: false
+    //   });
   }
 
   render() {
     const { currentUser, opinion, formErrors } = this.props;
-
     let transcriberButtons, loggedInButtons;
 
     if (currentUser && currentUser.id === opinion.transcriber_id) {
@@ -101,6 +113,14 @@ class OpinionDetailBody extends React.Component{
       loggedInButtons = null;
     }
 
+    const rightPanel = this.state.showAnnoPanel ?
+      <AnnotationFormContainer
+        range={ this.state.selectionRange }
+        location={ this.state.selectionLocation }
+        opinionId={ opinion.id }
+        /> :
+      <OpinionDetailPanel opinion={ opinion } />;
+
     return(
       <main className="opinion-detail-main">
         <section>
@@ -108,7 +128,9 @@ class OpinionDetailBody extends React.Component{
           </div>
           { loggedInButtons }
         </section>
-        <OpinionDetailPanel opinion={ this.props.opinion } />
+        <aside className="opinion-detail-main-panel">
+          { rightPanel }
+        </aside>
       </main>
     );
   }
