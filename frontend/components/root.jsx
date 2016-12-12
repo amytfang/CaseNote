@@ -27,7 +27,8 @@ const Root = ({ store }) => (
       <Route path="/" component={ App }>
         <Route path="/index" component={OpinionIndexContainer} />
         <Route path="/new" component={OpinionCreateFormContainer} />
-        <Route path="/opinions/:opinionId" component={OpinionDetailContainer} />
+        <Route path="/opinions/:opinionId"
+          component={OpinionDetailContainer} />
       </Route>
     </Router>
   </Provider>

@@ -9,6 +9,10 @@ import {
   RECEIVE_SINGLE_OPINION,
   RECEIVE_OPINION_ERRORS
 } from '../actions/opinion_actions';
+import {
+  RECEIVE_ANNOTATION,
+  RECEIVE_ANNOTATION_ERRORS
+} from '../actions/annotation_actions';
 
 const defaultState = {
   signup: { },
@@ -32,6 +36,10 @@ const errorsReducer = (state = defaultState, action) => {
     case RECEIVE_OPINION_ERRORS:
       newState["opinion"] = action.errors;
       return newState;
+    case RECEIVE_ANNOTATION_ERRORS:
+      newState["annotation"] = action.errors;
+      return newState;
+    case RECEIVE_ANNOTATION:
     case RECEIVE_CURRENT_USER:
     case RECEIVE_ALL_OPINIONS:
     case RECEIVE_SINGLE_OPINION:
