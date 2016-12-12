@@ -1,15 +1,24 @@
 import { connect } from 'react-redux';
-import { fetchAnnotation } from '../../actions/annotation_actions';
+import {
+  fetchAnnotation,
+  editAnnotation,
+  deleteAnnotation,
+ } from '../../actions/annotation_actions';
+import { fetchSingleOpinion } from '../../actions/opinion_actions';
 import AnnotationDetail from './annotation_detail';
 
 const mapStateToProps = (state, ownProps) => ({
-  id: ownProps.id,
+  annotationId: ownProps.annotationId,
   currentUser: state.currentUser,
-  annotation: state.annotationDetails
+  annotationDetail: state.annotationDetail,
+  location: ownProps.location,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchAnnotation: (id) => dispatch(fetchAnnotation(id))
+  fetchAnnotation: (id) => dispatch(fetchAnnotation(id)),
+  editAnnotation: (annotation) => dispatch(editAnnotation(annotation)),
+  deleteAnnotation: (id) => dispatch(deleteAnnotation(id)),
+  fetchSingleOpinion: (id) => dispatch(fetchSingleOpinion(id))
 });
 
 export default connect(

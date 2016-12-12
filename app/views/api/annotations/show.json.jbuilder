@@ -1,2 +1,2 @@
-json.extract! @annotation, :body, :start_idx, :length, :opinion_id, :user_id
-json.username @annotation.user.username
+json.extract! @annotation, :id, :body, :start_idx, :length, :opinion_id
+json.user @annotation.user

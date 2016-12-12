@@ -1,9 +1,11 @@
 import React from 'react';
 import OpinionDetailPanel from './opinion_detail_panel';
-import AnnotationFormContainer from '../annotations/annotation_form_container';
+import AnnotationFormContainer from
+  '../annotations/annotation_form_container';
+import AnnotationDetailContainer from
+  '../annotations/annotation_detail_container';
 import Quill from 'quill';
 import Delta from 'quill-delta';
-import Parchment from 'parchment';
 import { withRouter } from 'react-router';
 import Annotation from '../../util/annotation_format';
 
@@ -33,7 +35,7 @@ class OpinionDetailBody extends React.Component{
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
-    $("")
+    $(".opinion-annotation").on("click", this.displayAnnotation );
   }
 
   showEditForm() {
@@ -53,9 +55,34 @@ class OpinionDetailBody extends React.Component{
     this.quill.on("selection-change", this.handleSelection );
   }
 
+  annotationsUnchanged(updatedContents) {
+    const changedAnnotations = updatedContents
+      .filter((op) => op.attributes.annotation_id )
+      .map((op) => ({id: op.annotation_id, length: op.insert.length}));
+
+    const orginalAnnotations = this.props.opinion.annotations;
+    for (let i = 0; i < orginalAnnotations.length; i++) {
+      if (orginalAnnotations[i].length !== changedAnnotations[i].length)
+        return false;
+    }
+    return true;
+  }
+
+  updateAnnotation(updatedContents) {
+
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    const body = JSON.stringify(this.quill.getContents());
+    let updatedContents = this.quill.getContents();
+    // if (this.annotationsUnchanged(updatedContents)) {
+    //   updatedContents = this.updateAnnotations();
+    // } else {
+    //   //TODO: add error handling
+    //   this.hideEditForm();
+    //   return;
+    // }
+    const body = JSON.stringify(updatedContents);
     this.props.editOpinion({ body, id: this.props.opinion.id }).then(
       (op) => {
         this.quill.setContents(JSON.parse(op.opinion.body));
@@ -78,13 +105,12 @@ class OpinionDetailBody extends React.Component{
         selectionLocation: location,
         panelView: "annoForm"
       });
+    } else if (range && range.length === 0) {
+      const location = this.quill.getBounds(range.index, range.length);
+      this.setState({
+        selectionLocation: location,
+      });
     }
-    // else {
-    //   this.setState({
-    //     selectionRange: null,
-    //     selectionLocation: null,
-    //     showAnnoPanel: false
-    //   });
   }
 
   processAnnotations() {
@@ -92,15 +118,22 @@ class OpinionDetailBody extends React.Component{
     let bodyDelta = new Delta(JSON.parse(body));
     let annoDelta = new Delta();
 
+    let index = 0;
+
     annotations.forEach((anno) => {
-      annoDelta.retain(anno.start_idx);
-      annoDelta.retain(anno.length, { annotation_id: `anno-${anno.id}` });
+      annoDelta.retain(anno.start_idx - index);
+      annoDelta.retain(anno.length, { annotation_id: `${anno.id}` });
+      index = anno.start_idx + anno.length;
     });
     return bodyDelta.compose(annoDelta);
   }
 
   displayAnnotation(e) {
-    console.log(e);
+    e.preventDefault();
+    this.setState({
+      selectedAnnotationId: parseInt(e.target.id),
+      panelView: "annoDetail"
+    });
   }
 
   render() {
@@ -146,6 +179,7 @@ class OpinionDetailBody extends React.Component{
         opinionId={ opinion.id } />);
     } else if (this.state.panelView === "annoDetail") {
       rightPanel = (<AnnotationDetailContainer
+        location={ this.state.selectionLocation }
         opinionId={ opinion.id }
         annotationId={ this.state.selectedAnnotationId } />);
     }

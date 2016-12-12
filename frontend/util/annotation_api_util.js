@@ -1,4 +1,4 @@
-export const fetchAnnotatiion = (id) => {
+export const fetchAnnotation = (id) => {
   return $.ajax({
     type: "GET",
     url: `/api/annotations/${id}`

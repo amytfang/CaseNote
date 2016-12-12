@@ -39,8 +39,6 @@ class AnnotationForm extends React.Component {
 
   }
 
-
-
   render() {
     const { location, currentUser } = this.props;
 

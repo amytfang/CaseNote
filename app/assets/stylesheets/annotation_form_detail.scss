@@ -1,0 +1,33 @@
+.annotation-create-form, .annotation-detail-view {
+  float: left;
+  position: absolute;
+  border-left: 6px solid #99a7ee;
+  padding: 0px 20px;
+  font-weight: 400;
+}
+
+#annoForm {
+  background: rgba(204, 204, 204, 0.2);
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 10px;
+  height: 120px;
+  width: 360px;
+  overflow: scroll;
+}
+
+#anno-editor {
+  width: 360px;
+  height: 120px;
+  overflow: scroll;
+  margin: 10px 0px;
+}
+
+.annotation-detail-view-header {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.annotation-detail-view-header span {
+  text-decoration: underline;
+}
