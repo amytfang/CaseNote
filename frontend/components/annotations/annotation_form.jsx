@@ -50,7 +50,9 @@ class AnnotationForm extends React.Component {
 
     const showForm = (
       <form onSubmit={ this.handleSubmit }>
-        <div id="annoForm"></div>
+        <div id="annoForm">
+          <p>Add your thoughts!</p>
+        </div>
         <button>Save</button>
       </form>
     );

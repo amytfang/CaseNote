@@ -75,7 +75,7 @@
 }
 
 #editor {
-  overflow:scroll;
+  overflow: auto;
   height: 450px;
   border-radius: 3px;
   margin-top: 5px;
@@ -140,4 +140,8 @@
 	border-bottom-color: red;
 	border-width: 7px;
 	margin-left: -7px;
+}
+
+.ql-clipboard {
+  line-height: 0 !important
 }

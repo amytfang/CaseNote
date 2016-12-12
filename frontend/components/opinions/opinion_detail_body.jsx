@@ -9,6 +9,8 @@ import Delta from 'quill-delta';
 import { withRouter } from 'react-router';
 import Annotation from '../../util/annotation_format';
 
+Quill.register(Annotation);
+
 class OpinionDetailBody extends React.Component{
   constructor(props) {
     super(props);
@@ -21,7 +23,6 @@ class OpinionDetailBody extends React.Component{
       clickLocation: null
      };
 
-    // this.resetView = this.resetView.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
     this.hideEditForm = this.hideEditForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,7 +32,6 @@ class OpinionDetailBody extends React.Component{
   }
 
   componentDidMount() {
-    Quill.register(Annotation);
     $(".hidden-edit-button").hide();
     this.quill = new Quill('#edit-editor');
     this.quill.setContents(this.processAnnotations());
@@ -39,14 +39,20 @@ class OpinionDetailBody extends React.Component{
     this.quill.on("selection-change", this.handleSelection );
     $(".opinion-annotation").on("click", this.displayAnnotation );
     $(document).click((e) =>  {
-      if ($(e.target).hasClass("opinion-annotation")) {
-        this.setState({ panelView: "annoDetail"});
-      } else if (!$(e.target).closest('#opinion-detail-main-panel').length) {
+      if (!$(e.target).closest('#opinion-detail-main-panel').length &&
+        !$(e.target).hasClass("opinion-annotation")) {
         if (this.state.panelView !== "opinion") {
           this.setState({ panelView: "opinion"});
         }
       }
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.opinion.body !== nextProps.opinion.body) {
+      this.quill.setContents(this.processAnnotations(nextProps.opinion));
+      $(".opinion-annotation").on("click", this.displayAnnotation );
+    }
   }
 
   showEditForm() {
@@ -64,41 +70,61 @@ class OpinionDetailBody extends React.Component{
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
+    $(".opinion-annotation").on("click", this.displayAnnotation );
   }
 
-  annotationsUnchanged(updatedContents) {
-    const changedAnnotations = updatedContents
-      .filter((op) => op.attributes.annotation_id )
-      .map((op) => ({id: op.annotation_id, length: op.insert.length}));
+  parseAnnotations(updatedContents) {
+    let index = 0;
+    let result = [];
+    updatedContents.forEach((op) => {
+      if (op.hasOwnProperty("attributes") &&
+        op.attributes.hasOwnProperty("annotation_id")) {
+        result.push({
+          id: parseInt(op.attributes.annotation_id),
+          length: op.insert.length,
+          start_idx: index
+        });
+      }
+      index += op.insert.length;
+    });
+    return result;
+  }
 
-    const orginalAnnotations = this.props.opinion.annotations;
-    for (let i = 0; i < orginalAnnotations.length; i++) {
-      if (orginalAnnotations[i].length !== changedAnnotations[i].length)
+  annotationsUnchanged(updatedAnnotations) {
+    const originalAnnotations = this.props.opinion.annotations;
+    for (let i = 0; i < originalAnnotations.length; i++) {
+      if (originalAnnotations[i].length !== updatedAnnotations[i].length) {
         return false;
+      }
     }
     return true;
   }
 
-  updateAnnotation(updatedContents) {
-
+  updateAnnotations(newAnnotations) {
+    newAnnotations.forEach((anno) => {
+      this.props.editAnnotation(anno);
+      this.quill.formatText(anno.start_idx, anno.length, 'annotation_id', false);
+      this.quill.formatText(anno.start_idx, anno.length, 'background', false);
+    });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let updatedContents = this.quill.getContents();
-    // if (this.annotationsUnchanged(updatedContents)) {
-    //   updatedContents = this.updateAnnotations();
-    // } else {
-    //   //TODO: add error handling
-    //   this.hideEditForm();
-    //   return;
-    // }
-    const body = JSON.stringify(updatedContents);
-    this.props.editOpinion({ body, id: this.props.opinion.id }).then(
-      (op) => {
-        this.quill.setContents(JSON.parse(op.opinion.body));
-        this.hideEditForm();
-      });
+    let newContents = this.quill.getContents();
+    let newAnnotations = this.parseAnnotations(newContents);
+    if (this.annotationsUnchanged(newAnnotations)) {
+      this.updateAnnotations(newAnnotations);
+      const body = JSON.stringify(this.quill.getContents());
+      this.props.editOpinion({ body, id: this.props.opinion.id }).then(
+        (op) => {
+          this.quill.setContents(JSON.parse(op.opinion.body));
+          this.hideEditForm();
+        });
+    } else {
+      //TODO: add error handling
+      this.hideEditForm();
+      return;
+    }
   }
 
   handleDelete(e) {
@@ -119,8 +145,8 @@ class OpinionDetailBody extends React.Component{
     }
   }
 
-  processAnnotations() {
-    const { body, annotations } = this.props.opinion;
+  processAnnotations(opinion = this.props.opinion) {
+    const { body, annotations } = opinion;
     let bodyDelta = new Delta(JSON.parse(body));
     let annoDelta = new Delta();
 
@@ -142,22 +168,6 @@ class OpinionDetailBody extends React.Component{
       selectionLocation: locationY
     });
   }
-
-  // resetView(e) {
-  //   debugger
-  //   if (e.currentTarget.className === "opinion-detail-main-panel") {
-  //     return;
-  //   } else {
-  //     this.setState({
-  //       panelView: "opinion",
-  //       selectionRange: null,
-  //       selectionLocation: null,
-  //       selectedAnnotationId: null,
-  //       clickLocation: null
-  //     });
-  //   }
-  // }
-
 
   render() {
     const { currentUser, opinion, formErrors } = this.props;

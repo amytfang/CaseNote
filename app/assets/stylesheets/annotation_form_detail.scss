@@ -10,17 +10,17 @@
   background: rgba(204, 204, 204, 0.2);
   border: 1px solid #ccc;
   padding: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   height: 120px;
   width: 360px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #anno-editor {
   width: 360px;
-  height: 120px;
-  overflow: scroll;
-  margin: 10px 0px;
+  max-height: 360px;
+  overflow: auto;
+  margin: 10px 0px 20px 0px;
 }
 
 .annotation-detail-view-header {
