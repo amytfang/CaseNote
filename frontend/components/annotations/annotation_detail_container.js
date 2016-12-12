@@ -11,7 +11,7 @@ const mapStateToProps = (state, ownProps) => ({
   annotationId: ownProps.annotationId,
   currentUser: state.currentUser,
   annotationDetail: state.annotationDetail,
-  location: ownProps.location,
+  locationY: ownProps.location,
 });
 
 const mapDispatchToProps = (dispatch) => ({

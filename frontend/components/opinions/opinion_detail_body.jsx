@@ -17,9 +17,11 @@ class OpinionDetailBody extends React.Component{
       panelView: "opinion",
       selectionRange: null,
       selectionLocation: null,
-      selectedAnnotationId: null
+      selectedAnnotationId: null,
+      clickLocation: null
      };
 
+    // this.resetView = this.resetView.bind(this);
     this.showEditForm = this.showEditForm.bind(this);
     this.hideEditForm = this.hideEditForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +38,15 @@ class OpinionDetailBody extends React.Component{
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
     $(".opinion-annotation").on("click", this.displayAnnotation );
+    $(document).click((e) =>  {
+      if ($(e.target).hasClass("opinion-annotation")) {
+        this.setState({ panelView: "annoDetail"});
+      } else if (!$(e.target).closest('#opinion-detail-main-panel').length) {
+        if (this.state.panelView !== "opinion") {
+          this.setState({ panelView: "opinion"});
+        }
+      }
+    });
   }
 
   showEditForm() {
@@ -102,13 +113,8 @@ class OpinionDetailBody extends React.Component{
       const location = this.quill.getBounds(range.index, range.length);
       this.setState({
         selectionRange: range,
-        selectionLocation: location,
+        selectionLocation: ((location.top + location.bottom) / 2) - 15,
         panelView: "annoForm"
-      });
-    } else if (range && range.length === 0) {
-      const location = this.quill.getBounds(range.index, range.length);
-      this.setState({
-        selectionLocation: location,
       });
     }
   }
@@ -129,12 +135,29 @@ class OpinionDetailBody extends React.Component{
   }
 
   displayAnnotation(e) {
-    e.preventDefault();
+    const locationY = (e.pageY - 400) <= 0 ? 0 : e.pageY - 400;
     this.setState({
       selectedAnnotationId: parseInt(e.target.id),
-      panelView: "annoDetail"
+      panelView: "annoDetail",
+      selectionLocation: locationY
     });
   }
+
+  // resetView(e) {
+  //   debugger
+  //   if (e.currentTarget.className === "opinion-detail-main-panel") {
+  //     return;
+  //   } else {
+  //     this.setState({
+  //       panelView: "opinion",
+  //       selectionRange: null,
+  //       selectionLocation: null,
+  //       selectedAnnotationId: null,
+  //       clickLocation: null
+  //     });
+  //   }
+  // }
+
 
   render() {
     const { currentUser, opinion, formErrors } = this.props;
@@ -191,7 +214,9 @@ class OpinionDetailBody extends React.Component{
           </div>
           { loggedInButtons }
         </section>
-        <aside className="opinion-detail-main-panel">
+        <aside
+          id="opinion-detail-main-panel"
+          className="opinion-detail-main-panel">
           { rightPanel }
         </aside>
       </main>

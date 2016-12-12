@@ -23,6 +23,15 @@ class AnnotationDetail extends React.Component {
     this.quill.enable(false);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.annotationId !== nextProps.annotationId)
+      this.props.fetchAnnotation(nextProps.annotationId).then(
+        (anno) => {
+          this.quill.setContents(JSON.parse(anno.annotation.body));
+        }
+      );
+  }
+
   showEditForm(e) {
     e.preventDefault();
     $("#anno-editor").addClass("edit-mode");
@@ -31,7 +40,7 @@ class AnnotationDetail extends React.Component {
   }
 
   hideEditForm(e) {
-    e.preventDefault();
+    if (e) e.preventDefault();
     $("#anno-editor").removeClass("edit-mode");
     this.quill.setContents(JSON.parse(this.props.annotationDetail.body));
     this.quill.enable(false);
@@ -104,12 +113,12 @@ class AnnotationDetail extends React.Component {
 
 
   render() {
-    const style = {
-      top: `${ ((this.props.location.top + this.props.location.bottom) / 2) - 15}px`
+    const sectionStyle = {
+      top: `${ this.props.locationY }px`
     };
 
     return (
-      <section className="annotation-detail-view" style={ style }>
+      <section className="annotation-detail-view" style={ sectionStyle }>
         <div className="annotation-detail-view-header">
           Annotation by { this.contributors() }
         </div>

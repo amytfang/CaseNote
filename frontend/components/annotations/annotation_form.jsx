@@ -26,7 +26,7 @@ class AnnotationForm extends React.Component {
       opinion_id: this.props.opinionId
     };
     this.props.createAnnotation(annotation).then(
-      () => console.log("success!")
+      () => location.reload()
     );
   }
 
@@ -58,7 +58,7 @@ class AnnotationForm extends React.Component {
     const panelDisplay = this.state.annotateMode ? showForm : initialAsk ;
 
     const divStyle = {
-      top: `${ ((location.top + location.bottom) / 2) - 15}px`
+      top: `${ location }px`
     };
 
     return(
