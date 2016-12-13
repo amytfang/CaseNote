@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :courts, only: [:index]
     resources :judges, only: [:index]
     resources :annotations, only: [:create, :show, :update, :destroy]
+    resources :suggestions, only: [:create, :update, :destroy]
   end
 
   root "static_pages#root"

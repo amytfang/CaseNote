@@ -1,0 +1,2 @@
+module Api::SuggestionsHelper
+end

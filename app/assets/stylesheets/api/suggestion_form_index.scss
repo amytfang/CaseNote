@@ -1,0 +1,77 @@
+.suggestions-container {
+  margin: 20px 0px;
+  background-color: rgba(204,204,204,.2);
+  padding: 10px;
+}
+
+.suggestion-form {
+  margin-bottom: 10px;
+}
+
+.suggestion-form > input  {
+  display: block;
+  background: #fff;
+  border: 1px solid #aaa;
+  width: 328px;
+  padding: 5px;
+}
+
+.suggestion-form-radios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.suggestion-form-radio-option {
+  width: 170px;
+  font-size: 16px;
+}
+
+.suggestion-form-radio-option input {
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  float: left;
+}
+
+.suggestion-form-radio-option label {
+  padding: 5px 0px;
+  float: left;
+}
+
+.suggestion-form > button {
+  margin-top: 10px;
+  background: rgba(204,204,204,.2)
+}
+
+.suggestion-index {
+  border-top: 1px solid #99a7ee;
+}
+
+.suggestion-item {
+  padding: 5px 0px 10px 0px;
+  font-size: 16px;
+  border-bottom: 1px solid #99a7ee;
+}
+
+.suggestion-header {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.suggestion-header-left {
+  float: left;
+}
+
+.suggestion-header h4 {
+  font-weight: 700;
+}
+
+.suggestion-header h5, .suggestion-header > span {
+  font-size: 14px;
+}
+
+.suggestion-header > span {
+  float: right;
+}

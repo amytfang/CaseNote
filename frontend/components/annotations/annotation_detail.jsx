@@ -1,6 +1,8 @@
 import React from 'react';
 import Quill from 'quill';
 import {withRouter} from 'react-router';
+import SuggestionFormContainer from '../suggestions/suggestion_form_container';
+import SuggestionIndex from '../suggestions/suggestion_index';
 
 class AnnotationDetail extends React.Component {
   constructor(props) {
@@ -111,6 +113,19 @@ class AnnotationDetail extends React.Component {
     }
   }
 
+  suggestions() {
+    if (Object.getOwnPropertyNames(this.props.annotationDetail).length === 0) {
+      return null;
+    } else {
+      return (
+        <div className="suggestions-container">
+          <SuggestionFormContainer annotationId={this.props.annotationDetail.id} />
+          <SuggestionIndex suggestions={this.props.annotationDetail.suggestions} />
+        </div>
+      );
+    }
+  }
+
 
   render() {
     const sectionStyle = {
@@ -125,6 +140,9 @@ class AnnotationDetail extends React.Component {
         <div id="anno-editor">
         </div>
         { this.buttons() }
+        <div>
+          { this.suggestions() }
+        </div>
       </section>
     );
   }
