@@ -1,2 +1,1 @@
-export const opinionsToArray = (opinions) => Object.values(opinions);
-export const suggestionsToArray = (suggestions) => Object.values(suggestions);
+export const toArray = (obj) => Object.values(obj);

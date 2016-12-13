@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :annotations
   has_many :suggestions
+  has_many :comments
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

@@ -11,3 +11,14 @@ json.annotations do
       json.extract! annotation, :id, :start_idx, :length
     end
 end
+json.comments do
+  json.array! @opinion.comments
+    .sort { |x, y| x[:created_at] <=> y[:created_at] }
+    .each do |comment|
+      json.extract! comment, :id, :body, :opinion_id, :created_at
+      json.user do
+        json.extract! comment.user, :id, :username
+      end
+    end
+
+end

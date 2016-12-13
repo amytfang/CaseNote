@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :judges, only: [:index]
     resources :annotations, only: [:create, :show, :update, :destroy]
     resources :suggestions, only: [:create, :update, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
 
   root "static_pages#root"

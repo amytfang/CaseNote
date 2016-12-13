@@ -1,5 +1,6 @@
 import { RECEIVE_ANNOTATION } from '../actions/annotation_actions';
 import { RECEIVE_SUGGESTION, DELETE_SUGGESTION } from '../actions/suggestion_actions';
+import { RECEIVE_COMMENT } from '../actions/comment_actions';
 import { merge } from 'lodash';
 
 const annotationDetailReducer = (state = {}, action) => {
@@ -15,7 +16,6 @@ const annotationDetailReducer = (state = {}, action) => {
         newState["suggestions"] = action.suggestion;
       }
       return newState;
-    case DELETE_SUGGESTION:
     default:
       return newState;
   }

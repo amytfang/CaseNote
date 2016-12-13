@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { fetchAllOpinions } from '../../actions/opinion_actions';
 import OpinionIndex from './opinion_index';
-import { opinionsToArray } from '../../util/selectors';
+import { toArray } from '../../util/selectors';
 
 const mapStateToProps = (state) => ({
-  opinions: opinionsToArray(state.opinions),
+  opinions: toArray(state.opinions),
 });
 
 const mapDispatchToProps = (dispatch) => ({
