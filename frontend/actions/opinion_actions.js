@@ -1,5 +1,6 @@
 import * as APIUtil from '../util/opinion_api_util';
 import { clearErrors, requestToServer } from './general_actions';
+import { withRouter } from 'react-router';
 
 export const RECEIVE_ALL_OPINIONS = "RECEIVE_ALL_OPINIONS";
 export const RECEIVE_SINGLE_OPINION = "RECEIVE_SINGLE_OPINION";
@@ -62,9 +63,6 @@ export function editOpinion(opinion) {
 export function deleteOpinion(id) {
   return (dispatch) => {
     dispatch(requestToServer());
-    return APIUtil.deleteOpinion(id).then(
-      () => dispatch(receiveSingleOpinion({})),
-      (errors) => dispatch(receiveOpinionErrors(errors.responseJSON))
-    );
+    return APIUtil.deleteOpinion(id);
   };
 }

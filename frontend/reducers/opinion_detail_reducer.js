@@ -10,16 +10,16 @@ const opinionDetailReducer = (state = {}, action) => {
     case RECEIVE_SINGLE_OPINION:
       return action.opinion;
     case RECEIVE_ANNOTATION:
+      const { annotation } = action;
+      const newAnno = { [annotation.id]: {
+        id: annotation.id,
+        start_idx: annotation.start_idx,
+        length: annotation.length
+      }};
       if (newState.hasOwnProperty("annotations")) {
-        const { annotation } = action;
-        const newAnno = { [annotation.id]: {
-          id: annotation.id,
-          start_idx: annotation.start_idx,
-          length: annotation.length
-        }};
         Object.assign(newState.annotations, newAnno);
       } else {
-        newState["comments"] = action.comment;
+        newState["annotations"] = newAnno;
       }
       return newState;
     case REMOVE_ANNOTATION:

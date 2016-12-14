@@ -17,15 +17,20 @@ class OpinionCreateForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.focusCursor = this.focusCursor.bind(this);
   }
 
   componentDidMount() {
     const component = this;
 
-    const quill = new Quill('#editor');
-    quill.on('text-change', () => {
-      let text = JSON.stringify(quill.getContents());
-      this.setState({ body: text });
+    this.quill = new Quill('#editor');
+    this.quill.on('text-change', () => {
+      if (this.quill.getText() !== "\n") {
+        let text = JSON.stringify(this.quill.getContents());
+        this.setState({ body: text });
+      } else {
+        this.setState({ body: "" });
+      }
     });
 
     $.ajax({
@@ -42,8 +47,14 @@ class OpinionCreateForm extends React.Component {
 
   }
 
+  focusCursor() {
+    this.quill.focus();
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+
+
     const opinion = {
       case: this.state.case,
       citation: this.state.citation,
@@ -176,7 +187,7 @@ class OpinionCreateForm extends React.Component {
               </label>
 
               <label className="opinion-create-form-editor">Body *
-                <div id="editor">
+                <div id="editor" onClick={ this.focusCursor }>
                 </div>
                 { bodyErrors }
               </label>
