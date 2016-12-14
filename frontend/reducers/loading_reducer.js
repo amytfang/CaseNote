@@ -13,14 +13,12 @@ const defaultState = false;
 const loadingReducer = (state = defaultState, action) => {
   switch(action.type) {
     case REQUEST_TO_SERVER:
-      // console.log("loading");
       return true;
     case RECEIVE_ANNOTATION:
     case RECEIVE_COMMENT:
     case RECEIVE_ALL_OPINIONS:
     case RECEIVE_SINGLE_OPINION:
     case RECEIVE_SUGGESTION:
-      // console.log("loaded");
       return false;
     default:
       return state;

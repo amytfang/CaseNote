@@ -54,7 +54,6 @@ class OpinionCreateForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-
     const opinion = {
       case: this.state.case,
       citation: this.state.citation,
