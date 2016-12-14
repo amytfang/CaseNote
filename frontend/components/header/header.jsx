@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
-import Modal from 'react-modal';
-import ModalStyle from './modal_style';
-import ModalSessionFormContainer from '../session_form/modal_session_form_container';
+import ModalWrapper from '../session_form/modal_wrapper';
 
 class Header extends React.Component {
   constructor() {
@@ -12,6 +10,8 @@ class Header extends React.Component {
     this.handleSessionClick = this.handleSessionClick.bind(this);
     this.modalOff = this.modalOff.bind(this);
     this.checkLoggedIn = this.checkLoggedIn.bind(this);
+    this.modalOff = this.modalOff.bind(this);
+    this.changeFormType = this.changeFormType.bind(this);
   }
 
   handleSessionClick(e) {
@@ -54,15 +54,6 @@ class Header extends React.Component {
       );
     }
 
-    let otherOptionLink;
-    if (this.state.formType) {
-      let linkType = this.state.formType === 'signin' ? 'Create An Account' : 'Already Have an Account? Sign In Here';
-      let linkURL = this.state.formType === 'signin' ? 'signup' : 'signin';
-      otherOptionLink = <a onClick={ this.changeFormType.bind(this, linkURL) }>{ linkType }</a>
-    } else {
-      otherOptionLink = null;
-    }
-
     return (
       <header className="header">
         <header className="top-header">
@@ -76,20 +67,11 @@ class Header extends React.Component {
           <li><Link onClick={ this.checkLoggedIn }>Add Opinion</Link></li>
         </ul>
 
-        <Modal
+        <ModalWrapper
           isOpen={ this.state.modalOn }
           onRequestClose={ this.modalOff }
-          style={ ModalStyle }
-          contentLabel="Session Modal"
-        >
+          formType={ this.state.formType } />
 
-          <span onClick={ this.modalOff } className="modal-close">X</span>
-          <ModalSessionFormContainer
-            formType={ this.state.formType }
-            modalOff={ this.modalOff }
-          />
-          { otherOptionLink }
-        </Modal>
       </header>
     );
   }

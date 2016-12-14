@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalWrapper from '../session_form/modal_wrapper';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -6,11 +7,14 @@ class CommentForm extends React.Component {
     this.state = {
       fullForm: false,
       body: "",
+      modalOn: false
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showFullForm = this.showFullForm.bind(this);
     this.update = this.update.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.modalOff = this.modalOff.bind(this);
   }
 
   handleSubmit(e) {
@@ -31,6 +35,18 @@ class CommentForm extends React.Component {
     $(".comment-form").addClass("full-mode");
   }
 
+  modalOff() {
+    this.setState({ modalOn: false });
+    this.props.resetListener();
+  }
+
+  handleLogIn(e) {
+    e.preventDefault();
+    $(document).off();
+    this.setState({ modalOn: true });
+  }
+
+
   update(e) {
     this.setState({ body: e.target.value });
   }
@@ -38,7 +54,14 @@ class CommentForm extends React.Component {
   render() {
     const button = this.state.fullForm ? <button>Submit</button> : null;
     if (!this.props.loggedIn) {
-      return <button>Sign In to Leave a Comment</button>;
+      return (
+      <div>
+        <button onClick={ this.handleLogIn }>Sign In to Leave a Comment</button>;
+        <ModalWrapper
+          isOpen={ this.state.modalOn }
+          onRequestClose={ this.modalOff }
+          formType="signin" />
+      </div>);
     } else {
       return(
         <form onSubmit={ this.handleSubmit } className="comment-form">

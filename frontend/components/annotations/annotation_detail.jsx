@@ -115,7 +115,9 @@ class AnnotationDetail extends React.Component {
     } else {
       return (
         <div className="suggestions-container">
-          <SuggestionFormContainer annotationId={this.props.annotationDetail.id} />
+          <SuggestionFormContainer
+            annotationId={this.props.annotationDetail.id} 
+            resetListener={ this.props.resetListener }/>
           <SuggestionIndex suggestions={this.props.annotationDetail.suggestions} />
         </div>
       );

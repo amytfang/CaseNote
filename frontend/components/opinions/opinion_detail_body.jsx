@@ -33,6 +33,7 @@ class OpinionDetailBody extends React.Component{
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.displayAnnotation = this.displayAnnotation.bind(this);
+    this.resetListener = this.resetListener.bind(this);
   }
 
   componentDidMount() {
@@ -42,14 +43,7 @@ class OpinionDetailBody extends React.Component{
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
     $(".opinion-annotation").on("click", this.displayAnnotation );
-    $(document).click((e) =>  {
-      if (!$(e.target).closest('#opinion-detail-main-panel').length &&
-        !$(e.target).hasClass("opinion-annotation")) {
-        if (this.state.panelView !== "opinion") {
-          this.setState({ panelView: "opinion"});
-        }
-      }
-    });
+    this.resetListener();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,6 +52,17 @@ class OpinionDetailBody extends React.Component{
       this.quill.setContents(this.processAnnotations(nextProps.opinion));
       $(".opinion-annotation").on("click", this.displayAnnotation );
     }
+  }
+
+  resetListener() {
+    $(document).click((e) =>  {
+      if (!$(e.target).closest('#opinion-detail-main-panel').length &&
+        !$(e.target).hasClass("opinion-annotation")) {
+          if (this.state.panelView !== "opinion") {
+            this.setState({ panelView: "opinion"});
+          }
+        }
+    });
   }
 
   showEditForm() {
@@ -231,12 +236,14 @@ class OpinionDetailBody extends React.Component{
       rightPanel = (<AnnotationFormContainer
         range={ this.state.selectionRange }
         location={ this.state.selectionLocation }
-        opinionId={ opinion.id } />);
+        opinionId={ opinion.id }
+        resetListener={ this.resetListener }/>);
     } else if (this.state.panelView === "annoDetail") {
       rightPanel = (<AnnotationDetailContainer
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
-        annotationId={ this.state.selectedAnnotationId } />);
+        annotationId={ this.state.selectedAnnotationId }
+        resetListener={ this.resetListener } />);
     }
 
     return(
@@ -247,7 +254,9 @@ class OpinionDetailBody extends React.Component{
           { loggedInButtons }
 
           <section className="opinion-comment-section">
-            <CommentFormContainer opinionId={this.props.params.opinionId} />
+            <CommentFormContainer
+              opinionId={this.props.params.opinionId}
+              resetListener={ this.resetListener } />
             <CommentIndexContainer comments={this.props.opinion.comments} />
           </section>
         </section>

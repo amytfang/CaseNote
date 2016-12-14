@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalWrapper from '../session_form/modal_wrapper';
 
 class SuggestionForm extends React.Component {
   constructor(props) {
@@ -6,10 +7,13 @@ class SuggestionForm extends React.Component {
     this.state = {
       body: "",
       suggestion_type: "other",
-      fullForm: false
+      fullForm: false,
+      modalOn: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.showFullForm = this.showFullForm.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.modalOff = this.modalOff.bind(this);
   }
 
   update(property) {
@@ -25,6 +29,17 @@ class SuggestionForm extends React.Component {
     );
   }
 
+  modalOff() {
+    this.setState({ modalOn: false });
+    this.props.resetListener();
+  }
+
+  handleLogIn(e) {
+    e.preventDefault();
+    $(document).off();
+    this.setState({ modalOn: true });
+  }
+
   showFullForm(e) {
     e.preventDefault();
     this.setState({ fullForm: true });
@@ -36,7 +51,9 @@ class SuggestionForm extends React.Component {
       if (this.props.currentUser) {
         return null;
       } else {
-        return <button>Log In to Make Suggestion</button>;
+        return <button onClick={ this.handleLogIn }>
+          Log In to Make Suggestion
+        </button>;
       }
     } else {
       return null;
@@ -117,7 +134,15 @@ class SuggestionForm extends React.Component {
         </div>
       );
     } else {
-      return <button>Sign In to Make a Suggestion</button>;
+      return (
+        <div>
+          <button onClick={ this.handleLogIn }>Sign In to Make a Suggestion</button>
+          <ModalWrapper
+            isOpen={ this.state.modalOn }
+            onRequestClose={ this.modalOff }
+            formType="signin" />
+        </div>
+      );
     }
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Quill from 'quill';
+import ModalWrapper from '../session_form/modal_wrapper';
 
 class AnnotationForm extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ class AnnotationForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.startAnnotateMode = this.startAnnotateMode.bind(this);
-    this.modalOn = this.modalOn.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.modalOff = this.modalOff.bind(this);
   }
 
   componentDidUpdate() {
@@ -34,8 +36,15 @@ class AnnotationForm extends React.Component {
     this.setState({ annotateMode: true });
   }
 
-  modalOn() {
+  modalOff() {
+    this.setState({ modalOn: false });
+    this.props.resetListener();
+  }
 
+  handleLogIn(e) {
+    e.preventDefault();
+    $(document).off();
+    this.setState({ modalOn: true });
   }
 
   render() {
@@ -44,8 +53,14 @@ class AnnotationForm extends React.Component {
     const initialAsk = (currentUser) ?
       <button onClick={ this.startAnnotateMode }>
         Start the CaseNote Annotation </button> :
-      <button onClick={ this.modalOn }>
-        Sign In to Start Annotating </button> ;
+      (<div>
+        <button onClick={ this.handleLogIn }>
+          Sign In to Start Annotating </button>
+        <ModalWrapper
+          isOpen={ this.state.modalOn }
+          onRequestClose={ this.modalOff }
+          formType="signin" />
+      </div>);
 
     const showForm = (
       <form onSubmit={ this.handleSubmit }>
