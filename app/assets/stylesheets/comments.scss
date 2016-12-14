@@ -1,0 +1,50 @@
+.opinion-comment-section {
+  background: rgba(204,204,204,.2);
+  padding: 10px;
+  margin: 20px 0px;
+}
+
+.opinion-comment-section textarea {
+  font-size: 16px;
+  display:block;
+  width: 518px;
+  background: #fff;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.opinion-comment-section button {
+  margin: 10px 0px;
+}
+
+.opinion-comment-section .comment-form {
+  padding-bottom: 10px;
+}
+
+.full-mode textarea {
+  height: 80px;
+}
+
+.opinion-comment-section .comment-index {
+  border-top: 1px solid #99a7ee;
+}
+
+.comment-index .comment-item {
+  padding: 10px 0px;
+  border-bottom: 1px solid #99a7ee;
+}
+
+.comment-item header {
+  margin-bottom: 10px;
+}
+
+.comment-item h4 {
+  float: left;
+  font-weight: 700;
+}
+
+.comment-item span {
+  float: right;
+  font-size: 12px;
+  color: #aaa;
+}

@@ -40,15 +40,15 @@ class SuggestionItem extends React.Component {
     this.setState({editMode: true});
   }
 
-  buttons() {
+  links() {
     const { currentUser, suggestion } = this.props;
 
     if (currentUser === null || currentUser.id !== suggestion.user.id) {
       return null;
     } else {
-      return <div>
-        <button onClick={ this.showEdit }>Edit</button>
-        <button onClick={ this.handleDelete }>Delete</button>
+      return <div className="suggestion-user-links">
+        <span onClick={ this.showEdit }>Edit</span>
+        <span onClick={ this.handleDelete }>Delete</span>
       </div>;
     }
   }
@@ -78,13 +78,12 @@ class SuggestionItem extends React.Component {
             </header>
 
             <form onSubmit={ this.handleEdit }>
-              <input
-                type='text'
+              <textarea
                 value={ suggestion.body }
                 onChange={ this.update('body') }/>
-              <button>Submit</button>
+              <button>Submit</button> <button onClick={ this.hideEdit }>Cancel</button>
             </form>
-            <button onClick={ this.hideEdit }>Cancel</button>
+
           </div>
         </li>
       );
@@ -106,7 +105,7 @@ class SuggestionItem extends React.Component {
 
             <p>{ suggestion.body }</p>
           </div>
-          { this.buttons() }
+          { this.links() }
         </li>
       );
     }

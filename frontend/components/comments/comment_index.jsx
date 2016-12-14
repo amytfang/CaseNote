@@ -8,7 +8,7 @@ const CommentIndex = (props) => {
     <ul className="comment-index">
       { comments.map((comment) =>
         <li className="comment-item" key={comment.id}>
-          <header>
+          <header className="group">
             <h4>{ comment.user.username }</h4>
             <span>{ timeSince(comment.created_at) } ago</span>
           </header>

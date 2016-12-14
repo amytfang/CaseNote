@@ -107,8 +107,7 @@ class SuggestionForm extends React.Component {
           { this.loginButton() }
           <form onSubmit={ this.handleSubmit } className="suggestion-form">
             { this.typeButtons() }
-            <input
-              type="text"
+            <textarea
               value={ this.state.body }
               placeholder="Suggest an improvement"
               onFocus={ this.showFullForm }

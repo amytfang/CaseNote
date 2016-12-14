@@ -8,6 +8,7 @@ import { fetchSingleOpinion } from '../../actions/opinion_actions';
 import AnnotationDetail from './annotation_detail';
 
 const mapStateToProps = (state, ownProps) => ({
+  loading: state.loading,
   annotationId: ownProps.annotationId,
   currentUser: state.currentUser,
   annotationDetail: state.annotationDetail,

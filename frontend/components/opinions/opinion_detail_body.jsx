@@ -8,6 +8,8 @@ import Quill from 'quill';
 import Delta from 'quill-delta';
 import { withRouter } from 'react-router';
 import Annotation from '../../util/annotation_format';
+import CommentFormContainer from '../comments/comment_form_container';
+import CommentIndexContainer from '../comments/comment_index_container';
 
 Quill.register(Annotation);
 
@@ -223,6 +225,11 @@ class OpinionDetailBody extends React.Component{
           <div id="edit-editor" className="opinion-detail-main-body">
           </div>
           { loggedInButtons }
+
+          <section className="opinion-comment-section">
+            <CommentFormContainer opinionId={this.props.params.opinionId} />
+            <CommentIndexContainer comments={this.props.opinion.comments} />
+          </section>
         </section>
         <aside
           id="opinion-detail-main-panel"
