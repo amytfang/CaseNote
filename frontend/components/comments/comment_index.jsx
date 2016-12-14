@@ -3,6 +3,7 @@ import { toArray } from '../../util/selectors';
 import { timeSince } from '../../util/date';
 
 const CommentIndex = (props) => {
+  if (!props.comments) return null;
   const comments = toArray(props.comments);
   return (
     <ul className="comment-index">
