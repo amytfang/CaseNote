@@ -4,6 +4,7 @@ import { clearErrors, requestToServer } from './general_actions';
 export const RECEIVE_ANNOTATION = "RECEIVE_ANNOTATION";
 export const RECEIVE_ANNOTATION_ERRORS = "RECEIVE_ANNOTATION_ERRORS";
 export const REMOVE_ANNOTATION = "REMOVE_ANNOTATION";
+export const CLEAR_ANNOTATION = "CLEAR_ANNOTATION";
 
 export const receiveAnnotation = (annotation) => ({
   type: RECEIVE_ANNOTATION,
@@ -18,6 +19,10 @@ export const receiveAnnotationErrors = (errors) => ({
 export const removeAnnotation = (id) => ({
   type: REMOVE_ANNOTATION,
   id
+});
+
+export const clearAnnotation = () => ({
+  type: CLEAR_ANNOTATION,
 });
 
 export function fetchAnnotation(id) {

@@ -34,6 +34,8 @@ class OpinionDetailBody extends React.Component{
     this.handleSelection = this.handleSelection.bind(this);
     this.displayAnnotation = this.displayAnnotation.bind(this);
     this.resetListener = this.resetListener.bind(this);
+    this.setState = this.setState.bind(this);
+    this.setPanel = this.setPanel.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +46,10 @@ class OpinionDetailBody extends React.Component{
     this.quill.on("selection-change", this.handleSelection );
     $(".opinion-annotation").on("click", this.displayAnnotation );
     this.resetListener();
+  }
+
+  setPanel(type) {
+    this.setState({ panelView: type });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -237,13 +243,15 @@ class OpinionDetailBody extends React.Component{
         range={ this.state.selectionRange }
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
-        resetListener={ this.resetListener }/>);
+        resetListener={ this.resetListener }
+        setPanel = { this.setPanel } />);
     } else if (this.state.panelView === "annoDetail") {
       rightPanel = (<AnnotationDetailContainer
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
         annotationId={ this.state.selectedAnnotationId }
-        resetListener={ this.resetListener } />);
+        resetListener={ this.resetListener }
+        setPanel = { this.setPanel } />);
     }
 
     return(

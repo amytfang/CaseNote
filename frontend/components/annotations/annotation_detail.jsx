@@ -17,22 +17,34 @@ class AnnotationDetail extends React.Component {
 
   componentDidMount() {
     this.quill = new Quill('#anno-editor');
-    this.props.fetchAnnotation(this.props.annotationId).then(
-      (anno) => {
-        this.quill.setContents(JSON.parse(anno.annotation.body));
-      }
-    );
-    this.quill.enable(false);
+    if (this.props.annotationDetail.body) {
+      this.quill.setContents(JSON.parse(this.props.annotationDetail.body));
+    } else {
+      this.props.fetchAnnotation(this.props.annotationId).then(
+        (anno) => {
+          this.quill.setContents(JSON.parse(anno.annotation.body));
+        }
+      );
+    }
+  }
+    
+  componentWillUnmount() {
+    this.props.clearAnnotation();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.annotationId !== nextProps.annotationId)
+    if (this.props.annotationDetail.id !== nextProps.annotationDetail.id) {
+      this.quill.setContents(JSON.parse(nextProps.annotationDetail.body));
+    } else
+    if (this.props.annotationId !== nextProps.annotationId) {
       this.props.fetchAnnotation(nextProps.annotationId).then(
         (anno) => {
           this.quill.setContents(JSON.parse(anno.annotation.body));
         }
       );
+    }
   }
+
 
   showEditForm(e) {
     e.preventDefault();
@@ -65,7 +77,11 @@ class AnnotationDetail extends React.Component {
     e.preventDefault();
 
     const opinionId = this.props.annotationDetail.opinion_id;
-    this.props.deleteAnnotation(this.props.annotationDetail.id);
+    this.props.deleteAnnotation(this.props.annotationDetail.id).then(
+      () => {
+        this.props.setPanel("opinion");
+      }
+    );
   }
 
   buttons() {
@@ -116,7 +132,7 @@ class AnnotationDetail extends React.Component {
       return (
         <div className="suggestions-container">
           <SuggestionFormContainer
-            annotationId={this.props.annotationDetail.id} 
+            annotationId={this.props.annotationDetail.id}
             resetListener={ this.props.resetListener }/>
           <SuggestionIndex suggestions={this.props.annotationDetail.suggestions} />
         </div>
