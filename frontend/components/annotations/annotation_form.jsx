@@ -11,6 +11,7 @@ class AnnotationForm extends React.Component {
     this.startAnnotateMode = this.startAnnotateMode.bind(this);
     this.handleLogIn = this.handleLogIn.bind(this);
     this.modalOff = this.modalOff.bind(this);
+    this.focusCursor = this.focusCursor.bind(this);
   }
 
   componentDidUpdate() {
@@ -47,6 +48,10 @@ class AnnotationForm extends React.Component {
     this.setState({ modalOn: true });
   }
 
+  focusCursor() {
+    this.quill.focus();
+  }
+
   render() {
     const { location, currentUser } = this.props;
 
@@ -64,8 +69,7 @@ class AnnotationForm extends React.Component {
 
     const showForm = (
       <form onSubmit={ this.handleSubmit }>
-        <div id="annoForm">
-          <p>Add your thoughts!</p>
+        <div id="annoForm" onClick={ this.focusCursor }>
         </div>
         <button>Save</button>
       </form>

@@ -68,6 +68,7 @@ class SuggestionForm extends React.Component {
               id="restate"
               name="suggestion_type"
               value="restate"
+              checked={ this.state.suggestion_type === "restate"}
               onClick={ this.update('suggestion_type')} />
             <label htmlFor="restate">Restates the text</label>
           </div>
@@ -77,7 +78,8 @@ class SuggestionForm extends React.Component {
               id="missing"
               name="suggestion_type"
               value="missing"
-              onClick={ this.update('suggestion_type')} />
+              checked={ this.state.suggestion_type === "missing"}
+              onClick={ this.update('suggestion_type')}  />
             <label htmlFor="missing">Missing something</label>
           </div>
           <div className="suggestion-form-radio-option">
@@ -86,7 +88,8 @@ class SuggestionForm extends React.Component {
               id="stretch"
               name="suggestion_type"
               value="stretch"
-              onClick={ this.update('suggestion_type')} />
+              checked={ this.state.suggestion_type === "stretch"}
+              onClick={ this.update('suggestion_type')}  />
             <label htmlFor="stretch">It's a stretch</label>
           </div>
           <div className="suggestion-form-radio-option">
@@ -95,6 +98,7 @@ class SuggestionForm extends React.Component {
               id="other"
               name="suggestion_type"
               value="other"
+              checked={ this.state.suggestion_type === "other"}
               onClick={ this.update('suggestion_type')} />
             <label htmlFor="other">Other</label>
           </div>
