@@ -25,9 +25,8 @@ class AnnotationForm extends React.Component {
       length: this.props.range.length,
       opinion_id: this.props.opinionId
     };
-    this.props.createAnnotation(annotation).then(
-      () => location.reload()
-    );
+    this.props.createAnnotation(annotation);
+    this.setState({ annotateMode: false, modalOn: false });
   }
 
   startAnnotateMode(e) {

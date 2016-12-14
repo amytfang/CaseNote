@@ -3,6 +3,7 @@ import { clearErrors, requestToServer } from './general_actions';
 
 export const RECEIVE_SUGGESTION = "RECEIVE_SUGGESTION";
 export const RECEIVE_SUGGESTION_ERRORS = "RECEIVE_SUGGESTION_ERRORS";
+export const REMOVE_SUGGESTION = "REMOVE_SUGGESTION";
 
 export const receiveSuggestion = (suggestion) => ({
   type: RECEIVE_SUGGESTION,
@@ -13,6 +14,12 @@ export const receiveSuggestionErrors = (errors) => ({
   type: RECEIVE_SUGGESTION_ERRORS,
   errors
 });
+
+export const removeSuggestion = (id) => ({
+  type: REMOVE_SUGGESTION,
+  id
+});
+
 
 export function createSuggestion(suggestion) {
   return (dispatch) => {
@@ -38,7 +45,7 @@ export function deleteSuggestion(id) {
   return (dispatch) => {
     dispatch(requestToServer());
     return APIUtil.deleteSuggestion(id).then(
-      () => dispatch(receiveSuggestion({})),
+      (suggestion) => dispatch(removeSuggestion(suggestion)),
       (errors) => dispatch(receiveSuggestionErrors(errors))
     );
   };

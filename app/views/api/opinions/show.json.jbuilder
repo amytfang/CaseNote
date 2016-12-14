@@ -5,20 +5,22 @@ json.date @opinion.date.strftime("%B %d, %Y")
 json.transcriber @opinion.transcriber.username
 json.image_url @opinion.use_image.url(:large)
 json.annotations do
-  json.array! @opinion.annotations
-    .sort { |x, y| x[:start_idx] <=> y[:start_idx] }
-    .each do |annotation|
-      json.extract! annotation, :id, :start_idx, :length
-    end
-end
-json.comments do
-  json.array! @opinion.comments
-    .sort { |x, y| x[:created_at] <=> y[:created_at] }
-    .each do |comment|
-      json.extract! comment, :id, :body, :opinion_id, :created_at
-      json.user do
-        json.extract! comment.user, :id, :username
+  @opinion.annotations
+    .each do |anno|
+      json.set! anno.id do
+        json.extract! anno, :id, :start_idx, :length
       end
     end
+end
 
+json.comments do
+  @opinion.comments
+    .each do |comment|
+      json.set! comment.id do
+        json.extract! comment, :id, :body, :opinion_id, :created_at
+        json.user do
+          json.extract! comment.user, :id, :username
+        end
+      end
+    end
 end

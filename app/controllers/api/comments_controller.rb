@@ -12,7 +12,7 @@ class Api::CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy
-      render :show
+      render json: @comment.id
     else
       render json: @comment.errors.messages, status: 422
     end

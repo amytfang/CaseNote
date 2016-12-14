@@ -20,7 +20,9 @@ class CommentForm extends React.Component {
       opinion_id: this.props.opinionId
     };
 
-    this.props.createComment(comment);
+    this.props.createComment(comment).then(() => {
+      this.setState({ fullForm: false, body: ""});
+    });
   }
 
   showFullForm(e) {

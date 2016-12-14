@@ -10,6 +10,8 @@ import { withRouter } from 'react-router';
 import Annotation from '../../util/annotation_format';
 import CommentFormContainer from '../comments/comment_form_container';
 import CommentIndexContainer from '../comments/comment_index_container';
+import { toArray } from '../../util/selectors';
+import { isEqual } from 'lodash';
 
 Quill.register(Annotation);
 
@@ -51,7 +53,8 @@ class OpinionDetailBody extends React.Component{
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.opinion.body !== nextProps.opinion.body) {
+    if (this.props.opinion.body !== nextProps.opinion.body ||
+      !isEqual(this.props.opinion.annotations, nextProps.opinion.annotations)) {
       this.quill.setContents(this.processAnnotations(nextProps.opinion));
       $(".opinion-annotation").on("click", this.displayAnnotation );
     }
@@ -93,7 +96,14 @@ class OpinionDetailBody extends React.Component{
   }
 
   annotationsUnchanged(updatedAnnotations) {
-    const originalAnnotations = this.props.opinion.annotations;
+    const originalAnnotations = toArray(this.props.opinion.annotations).sort((a, b) => {
+      if (a.start_idx < b.start_idx) {
+        return -1;
+      } else if (a.start_idx > b.start_idx) {
+        return 1;
+      } else {
+        return 0;
+      }});
     for (let i = 0; i < originalAnnotations.length; i++) {
       if (originalAnnotations[i].length !== updatedAnnotations[i].length) {
         return false;
@@ -150,11 +160,21 @@ class OpinionDetailBody extends React.Component{
   processAnnotations(opinion = this.props.opinion) {
     const { body, annotations } = opinion;
     let bodyDelta = new Delta(JSON.parse(body));
+    if (!annotations) return bodyDelta;
     let annoDelta = new Delta();
+    const annoArray = toArray(annotations).sort((a, b) => {
+      if (a.start_idx < b.start_idx) {
+        return -1;
+      } else if (a.start_idx > b.start_idx) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
 
     let index = 0;
 
-    annotations.forEach((anno) => {
+    annoArray.forEach((anno) => {
       annoDelta.retain(anno.start_idx - index);
       annoDelta.retain(anno.length, { annotation_id: `${anno.id}` });
       index = anno.start_idx + anno.length;

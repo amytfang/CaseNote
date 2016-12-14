@@ -28,7 +28,7 @@ class Api::AnnotationsController < ApplicationController
   def destroy
     @annotation = Annotation.find(params[:id])
     if @annotation.destroy
-      render json: {}
+      render json: @annotation.id
     else
       render json: @annotation.errors.messages, status: 422
     end

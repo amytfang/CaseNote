@@ -3,6 +3,7 @@ import { clearErrors, requestToServer } from './general_actions';
 
 export const RECEIVE_ANNOTATION = "RECEIVE_ANNOTATION";
 export const RECEIVE_ANNOTATION_ERRORS = "RECEIVE_ANNOTATION_ERRORS";
+export const REMOVE_ANNOTATION = "REMOVE_ANNOTATION";
 
 export const receiveAnnotation = (annotation) => ({
   type: RECEIVE_ANNOTATION,
@@ -12,6 +13,11 @@ export const receiveAnnotation = (annotation) => ({
 export const receiveAnnotationErrors = (errors) => ({
   type: RECEIVE_ANNOTATION_ERRORS,
   errors
+});
+
+export const removeAnnotation = (id) => ({
+  type: REMOVE_ANNOTATION,
+  id
 });
 
 export function fetchAnnotation(id) {
@@ -48,7 +54,7 @@ export function deleteAnnotation(id) {
   return (dispatch) => {
     dispatch(requestToServer());
     return APIUtil.deleteAnnotation(id).then(
-      () => dispatch(receiveAnnotation({})),
+      (annotation) => dispatch(removeAnnotation(annotation)),
       (errors) => dispatch(receiveAnnotationErrors(errors))
     );
   };

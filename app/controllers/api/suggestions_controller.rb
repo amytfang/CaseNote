@@ -21,7 +21,7 @@ class Api::SuggestionsController < ApplicationController
   def destroy
     @suggestion = Suggestion.find(params[:id])
     if @suggestion.destroy
-      render json: {}
+      render json: @suggestion.id
     else
       render json: @suggestion.errors.messages, status: 422
     end

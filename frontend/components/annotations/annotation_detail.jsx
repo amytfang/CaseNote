@@ -64,12 +64,8 @@ class AnnotationDetail extends React.Component {
   handleDelete(e) {
     e.preventDefault();
 
-    //TODO: figure something out for actions after delete other than reload
     const opinionId = this.props.annotationDetail.opinion_id;
-    this.props.deleteAnnotation(this.props.annotationDetail.id)
-      .then(
-        () => location.reload()
-      );
+    this.props.deleteAnnotation(this.props.annotationDetail.id);
   }
 
   buttons() {

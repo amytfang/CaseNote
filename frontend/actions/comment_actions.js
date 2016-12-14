@@ -3,6 +3,7 @@ import { clearErrors, requestToServer } from './general_actions';
 
 export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
 export const RECEIVE_COMMENT_ERRORS = "RECEIVE_COMMENT_ERRORS";
+export const REMOVE_COMMENT = "REMOVE_COMMENT";
 
 export const receiveComment = (comment) => ({
   type: RECEIVE_COMMENT,
@@ -12,6 +13,11 @@ export const receiveComment = (comment) => ({
 export const receiveCommentErrors = (errors) => ({
   type: RECEIVE_COMMENT_ERRORS,
   errors
+});
+
+export const removeComment = (id) => ({
+  type: REMOVE_COMMENT,
+  id
 });
 
 export function createComment(comment) {
@@ -28,7 +34,7 @@ export function deleteComment(id) {
   return (dispatch) => {
     dispatch(requestToServer());
     return APIUtil.deleteComment(id).then(
-      () => dispatch(receiveComment({})),
+      (comment) => dispatch(removeComment(comment)),
       (errors) => dispatch(receiveCommentErrors(errors))
     );
   };
