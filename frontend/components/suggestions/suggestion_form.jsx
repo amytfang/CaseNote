@@ -31,12 +31,10 @@ class SuggestionForm extends React.Component {
 
   modalOff() {
     this.setState({ modalOn: false });
-    this.props.resetListener();
   }
 
   handleLogIn(e) {
     e.preventDefault();
-    $(document).off();
     this.setState({ modalOn: true });
   }
 

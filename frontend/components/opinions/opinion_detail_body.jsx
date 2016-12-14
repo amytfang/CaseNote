@@ -61,8 +61,10 @@ class OpinionDetailBody extends React.Component{
   }
 
   resetListener() {
-    $(document).click((e) =>  {
-      if (!$(e.target).closest('#opinion-detail-main-panel').length &&
+    $("body").click((e) =>  {
+      if ($(e.target).closest('.modal-session-form').length) {
+        return;
+      } else if (!$(e.target).closest('#opinion-detail-main-panel').length &&
         !$(e.target).hasClass("opinion-annotation")) {
           if (this.state.panelView !== "opinion") {
             this.setState({ panelView: "opinion"});
@@ -243,14 +245,12 @@ class OpinionDetailBody extends React.Component{
         range={ this.state.selectionRange }
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
-        resetListener={ this.resetListener }
         setPanel = { this.setPanel } />);
     } else if (this.state.panelView === "annoDetail") {
       rightPanel = (<AnnotationDetailContainer
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
         annotationId={ this.state.selectedAnnotationId }
-        resetListener={ this.resetListener }
         setPanel = { this.setPanel } />);
     }
 
@@ -262,9 +262,7 @@ class OpinionDetailBody extends React.Component{
           { loggedInButtons }
 
           <section className="opinion-comment-section">
-            <CommentFormContainer
-              opinionId={this.props.params.opinionId}
-              resetListener={ this.resetListener } />
+            <CommentFormContainer opinionId={this.props.params.opinionId} />
             <CommentIndexContainer comments={this.props.opinion.comments} />
           </section>
         </section>
