@@ -12,6 +12,8 @@
 #
 
 class Suggestion < ActiveRecord::Base
+  include Votable
+
   validates :user, :annotation, :suggestion_type, presence: true
   validates :suggestion_type, inclusion: {
     in: %w(restate missing stretch other),

@@ -27,9 +27,30 @@ class Api::SuggestionsController < ApplicationController
     end
   end
 
+  def downvote; vote(-1); end
+  def upvote; vote(1); end
+
   private
 
   def suggestion_params
     params.require(:suggestion).permit(:annotation_id, :suggestion_type, :body)
+  end
+
+  def vote(direction)
+    @suggestion = Suggestion.find(params[:id])
+    @vote = Vote.find_by_votable(@suggestion, current_user.id)
+
+    if @vote
+      if @vote.status == direction
+        @vote.destroy
+        render json: 0
+      else
+        @vote.update(status: direction)
+        render json: @vote.status
+      end
+    else
+      @suggestion.votes.create!(user_id: current_user.id, status: direction)
+      render json: direction
+    end
   end
 end

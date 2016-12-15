@@ -1,6 +1,7 @@
 import React from 'react';
 import { toArray } from '../../util/selectors';
 import { timeSince } from '../../util/date';
+import VoteContainer from '../votes/vote_container';
 
 const CommentIndex = (props) => {
   if (!props.comments) return null;
@@ -14,6 +15,11 @@ const CommentIndex = (props) => {
             <span>{ timeSince(comment.created_at) } ago</span>
           </header>
           <p>{ comment.body }</p>
+          <VoteContainer
+            numVotes={ comment.numVotes }
+            userVote={ comment.userVote }
+            votableId={ comment.id }
+            votableType="Comment"/>
         </li>
       )}
     </ul>

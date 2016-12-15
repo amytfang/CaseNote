@@ -1,6 +1,9 @@
 import { RECEIVE_SINGLE_OPINION } from '../actions/opinion_actions';
 import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comment_actions';
-import { RECEIVE_ANNOTATION, REMOVE_ANNOTATION } from '../actions/annotation_actions';
+import { RECEIVE_ANNOTATION,
+  REMOVE_ANNOTATION
+} from '../actions/annotation_actions';
+import { RECEIVE_COMMENT_VOTE } from '../actions/vote_actions';
 import { merge } from 'lodash';
 
 const opinionDetailReducer = (state = {}, action) => {
@@ -32,6 +35,17 @@ const opinionDetailReducer = (state = {}, action) => {
         newState["comments"] = action.comment;
       }
       return newState;
+    case RECEIVE_COMMENT_VOTE:
+    debugger
+      const oldUserVote = newState.comments[action.id].userVote;
+      if (!oldUserVote || oldUserVote !== action.userVote) {
+        newState.comments[action.id].numVotes += action.userVote - oldUserVote;
+        newState.comments[action.id].userVote = action.userVote;
+        debugger
+        return newState;
+      } else {
+        return newState;
+      }
     case REMOVE_COMMENT:
     default:
       return newState;

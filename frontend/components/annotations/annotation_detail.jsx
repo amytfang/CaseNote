@@ -3,6 +3,7 @@ import Quill from 'quill';
 import {withRouter} from 'react-router';
 import SuggestionFormContainer from '../suggestions/suggestion_form_container';
 import SuggestionIndex from '../suggestions/suggestion_index';
+import VoteContainer from '../votes/vote_container';
 
 class AnnotationDetail extends React.Component {
   constructor(props) {
@@ -152,6 +153,11 @@ class AnnotationDetail extends React.Component {
         <div id="anno-editor">
         </div>
         { this.buttons() }
+        <VoteContainer
+          numVotes={ this.props.annotationDetail.numVotes }
+          userVote={ this.props.annotationDetail.userVote }
+          votableId={ this.props.annotationDetail.id }
+          votableType="Annotation"/>
         <div>
           { this.suggestions() }
         </div>

@@ -13,6 +13,8 @@
 #
 
 class Annotation < ActiveRecord::Base
+  include Votable
+
   validates :user, :opinion, :start_idx, :length, :body, presence: true
 
   belongs_to :user

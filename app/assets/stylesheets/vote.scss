@@ -1,0 +1,46 @@
+.vote-buttons {
+  padding: 10px 0px 5px 0px;
+  display: block;
+}
+
+.vote-buttons .vote-count {
+  float: left;
+  height: 16px;
+  padding: 0px 10px;
+  font-weight: 700;
+  color: #828282;
+}
+
+.vote-count.negative {
+  color: #D80027;
+}
+
+.vote-count.positive {
+  color: #39c732;
+}
+
+.upvote-icon, .downvote-icon {
+  height: 16px;
+  width: 16px;
+  cursor: pointer
+}
+
+.upvote-icon {
+  background-image: image-url("icons/thumb-up-button.svg");
+  background-size: contain;
+  float: left;
+}
+
+.downvote-icon {
+  background-image: image-url("icons/thumb-down-button.svg");
+  background-size: contain;
+  float: left;
+}
+
+.upvote-icon.selected, .upvote-icon:hover {
+  background-image: image-url("icons/thumb-up-button-selected.svg");
+}
+
+.downvote-icon.selected, .downvote-icon:hover {
+  background-image: image-url("icons/thumb-down-button-selected.svg");
+}

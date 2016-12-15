@@ -1,4 +1,7 @@
 FactoryGirl.define do
+  factory :vote do
+    
+  end
   factory :comment do
     
   end

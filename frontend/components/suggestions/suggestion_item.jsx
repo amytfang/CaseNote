@@ -1,5 +1,6 @@
 import React from 'react';
 import { timeSince } from '../../util/date';
+import VoteContainer from '../votes/vote_container';
 
 const SUGGESTION_TYPES = {
   missing: "missing something",
@@ -61,6 +62,7 @@ class SuggestionItem extends React.Component {
   render() {
     const { suggestion } = this.props;
 
+    //TODO: refactor
     if (this.state.editMode) {
       return(
         <li className="suggestion-item">
@@ -83,7 +85,11 @@ class SuggestionItem extends React.Component {
                 onChange={ this.update('body') }/>
               <button>Submit</button> <button onClick={ this.hideEdit }>Cancel</button>
             </form>
-
+            <VoteContainer
+              numVotes={ suggestion.numVotes }
+              userVote={ suggestion.userVote }
+              votableId={ suggestion.id }
+              votableType="Suggestion"/>
           </div>
         </li>
       );
@@ -105,6 +111,11 @@ class SuggestionItem extends React.Component {
 
             <p>{ suggestion.body }</p>
           </div>
+          <VoteContainer
+            numVotes={ suggestion.numVotes }
+            userVote={ suggestion.userVote }
+            votableId={ suggestion.id }
+            votableType="Suggestion"/>
           { this.links() }
         </li>
       );

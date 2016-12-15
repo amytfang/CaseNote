@@ -34,9 +34,30 @@ class Api::AnnotationsController < ApplicationController
     end
   end
 
+  def downvote; vote(-1); end
+  def upvote; vote(1); end
+
   private
 
   def annotation_params
     params.require(:annotation).permit(:body, :start_idx, :length, :opinion_id)
+  end
+
+  def vote(direction)
+    @annotation = Annotation.find(params[:id])
+    @vote = Vote.find_by_votable(@annotation, current_user.id)
+
+    if @vote
+      if @vote.status == direction
+        @vote.destroy
+        render json: 0
+      else
+        @vote.update(status: direction)
+        render json: @vote.status
+      end
+    else
+      @annotation.votes.create!(user_id: current_user.id, status: direction)
+      render json: direction
+    end
   end
 end
