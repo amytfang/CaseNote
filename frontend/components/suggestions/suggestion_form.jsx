@@ -1,5 +1,6 @@
 import React from 'react';
 import ModalWrapper from '../session_form/modal_wrapper';
+import Thumb from '../header/thumb';
 
 class SuggestionForm extends React.Component {
   constructor(props) {

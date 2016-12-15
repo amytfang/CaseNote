@@ -1,6 +1,7 @@
 import React from 'react';
 import { timeSince } from '../../util/date';
 import VoteContainer from '../votes/vote_container';
+import Thumb from '../header/thumb';
 
 const SUGGESTION_TYPES = {
   missing: "missing something",
@@ -69,6 +70,7 @@ class SuggestionItem extends React.Component {
           <div>
             <header className="suggestion-header group">
               <div className="suggestion-header-left">
+                <Thumb imageURL={ suggestion.user.image } currentUser={false} />
                 <h4>{ suggestion.user.username }</h4>
                 <h5>
                   Marked as <span>{
@@ -99,6 +101,7 @@ class SuggestionItem extends React.Component {
           <div>
             <header className="suggestion-header group">
               <div className="suggestion-header-left">
+                <Thumb imageURL={ suggestion.user.image } currentUser={false} />
                 <h4>{ suggestion.user.username }</h4>
                 <h5>
                   Marked as <span>{
