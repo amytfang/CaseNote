@@ -6,9 +6,10 @@
 .vote-buttons .vote-count {
   float: left;
   height: 16px;
-  padding: 0px 10px;
   font-weight: 700;
   color: #828282;
+  width: 30px;
+  text-align: center;
 }
 
 .vote-count.negative {

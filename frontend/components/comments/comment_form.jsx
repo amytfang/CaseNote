@@ -54,7 +54,7 @@ class CommentForm extends React.Component {
     if (!this.props.loggedIn) {
       return (
       <div>
-        <button onClick={ this.handleLogIn }>Sign In to Leave a Comment</button>;
+        <button onClick={ this.handleLogIn }>Sign In to Leave a Comment</button>
         <ModalWrapper
           isOpen={ this.state.modalOn }
           onRequestClose={ this.modalOff }
