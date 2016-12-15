@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
+import Thumb from './thumb';
 import ModalWrapper from '../session_form/modal_wrapper';
 
 class Header extends React.Component {
@@ -41,6 +42,7 @@ class Header extends React.Component {
     if (this.props.currentUser) {
       userLinks = (
         <ul className="header-user-links">
+          <li className="icon-list-item"><Thumb imageURL={ this.props.currentUser.thumb } currentUser="true" /></li>
           <li>{ this.props.currentUser.username }</li>
           <li onClick={ this.props.logout }><a>Sign Out</a></li>
         </ul>

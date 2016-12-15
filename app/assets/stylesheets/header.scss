@@ -29,7 +29,7 @@
   padding: 14px 10px;
   font-size: 11px;
   text-transform: uppercase;
-  font-weight: 500px;
+  font-weight: 500;
 }
 
 .header-nav {
@@ -46,4 +46,35 @@
   padding: 10px 20px;
   letter-spacing: 1px;
   font-weight: 300;
+}
+
+.header-nav li:hover {
+  color: #99a7ee;
+}
+
+.header-user-links .icon-list-item {
+  padding: 0;
+}
+
+.user-icon {
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  margin: 7px;
+  float:left;
+}
+
+.user-icon.large img {
+  width: 24px;
+  height: 24px;
+}
+
+.user-icon.small img {
+  width: 16px;
+  height: 16px;
+}
+
+.user-icon.small {
+  display: inline;
+  margin: 0px 10px 0px 0px;
 }

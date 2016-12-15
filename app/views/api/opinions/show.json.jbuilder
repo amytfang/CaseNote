@@ -22,6 +22,7 @@ json.comments do
         json.userVote comment.user_vote(current_user.id) if logged_in?
         json.user do
           json.extract! comment.user, :id, :username
+          json.thumb comment.user.avatar.url(:thumb)
         end
       end
     end

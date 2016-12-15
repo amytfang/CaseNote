@@ -2,12 +2,16 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  username        :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                  :integer          not null, primary key
+#  username            :string           not null
+#  password_digest     :string           not null
+#  session_token       :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  avatar_file_name    :string
+#  avatar_content_type :string
+#  avatar_file_size    :integer
+#  avatar_updated_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -28,6 +32,15 @@ class User < ActiveRecord::Base
   has_many :suggestions
   has_many :comments
   has_many :votes, inverse_of: :user
+
+  has_attached_file :avatar, styles: {
+    large: "600x600>", thumb: "100x100#"
+  }, default_url: "https://s3.us-east-2.amazonaws.com/casenote-assets/user_default_:style.jpg"
+
+  validates_attachment_content_type(
+    :avatar,
+    content_type: /\Aimage\/.*\Z/
+  )
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

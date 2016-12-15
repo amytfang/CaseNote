@@ -6,8 +6,8 @@
 
 .opinion-comment-section textarea {
   font-size: 16px;
-  display:block;
-  width: 518px;
+  float: left;
+  width: 470px;
   background: #fff;
   padding: 5px;
   border: 1px solid #ccc;
@@ -15,6 +15,7 @@
 
 .opinion-comment-section button {
   margin: 10px 0px;
+  float: left;
 }
 
 .opinion-comment-section .comment-form {
@@ -23,6 +24,7 @@
 
 .full-mode textarea {
   height: 80px;
+  width: 530px;
 }
 
 .opinion-comment-section .comment-index {
@@ -47,4 +49,12 @@
   float: right;
   font-size: 12px;
   color: #aaa;
+}
+
+.comment-form .user-icon {
+  margin: 12px 5px;
+}
+
+.full-mode.comment-form .user-icon {
+  display: none;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ModalWrapper from '../session_form/modal_wrapper';
+import Thumb from '../header/thumb';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -26,7 +27,9 @@ class CommentForm extends React.Component {
 
     this.props.createComment(comment).then(() => {
       this.setState({ fullForm: false, body: ""});
+      $(".comment-form").removeClass("full-mode");
     });
+
   }
 
   showFullForm(e) {
@@ -51,9 +54,9 @@ class CommentForm extends React.Component {
 
   render() {
     const button = this.state.fullForm ? <button>Submit</button> : null;
-    if (!this.props.loggedIn) {
+    if (!this.props.currentUser) {
       return (
-      <div>
+      <div className="group">
         <button onClick={ this.handleLogIn }>Sign In to Leave a Comment</button>
         <ModalWrapper
           isOpen={ this.state.modalOn }
@@ -62,12 +65,15 @@ class CommentForm extends React.Component {
       </div>);
     } else {
       return(
-        <form onSubmit={ this.handleSubmit } className="comment-form">
-          <textarea
-            value={ this.state.body }
-            placeholder="Add a Comment"
-            onFocus={ this.showFullForm }
-            onChange={ this.update }></textarea>
+        <form onSubmit={ this.handleSubmit } className="comment-form group">
+          <div>
+            <Thumb imageURL={ this.props.currentUser.thumb } currentUser="true" />
+            <textarea
+              value={ this.state.body }
+              placeholder="Add a Comment"
+              onFocus={ this.showFullForm }
+              onChange={ this.update }></textarea>
+          </div>
           { button }
         </form>
       );

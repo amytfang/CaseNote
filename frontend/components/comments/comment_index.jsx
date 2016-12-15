@@ -2,6 +2,7 @@ import React from 'react';
 import { toArray } from '../../util/selectors';
 import { timeSince } from '../../util/date';
 import VoteContainer from '../votes/vote_container';
+import Thumb from '../header/thumb';
 
 const CommentIndex = (props) => {
   if (!props.comments) return null;
@@ -11,6 +12,7 @@ const CommentIndex = (props) => {
       { comments.map((comment) =>
         <li className="comment-item" key={comment.id}>
           <header className="group">
+            <Thumb imageURL={ comment.user.thumb } currentUser={false} />
             <h4>{ comment.user.username }</h4>
             <span>{ timeSince(comment.created_at) } ago</span>
           </header>
