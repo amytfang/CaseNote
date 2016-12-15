@@ -36,12 +36,10 @@ const opinionDetailReducer = (state = {}, action) => {
       }
       return newState;
     case RECEIVE_COMMENT_VOTE:
-    debugger
       const oldUserVote = newState.comments[action.id].userVote;
       if (!oldUserVote || oldUserVote !== action.userVote) {
         newState.comments[action.id].numVotes += action.userVote - oldUserVote;
         newState.comments[action.id].userVote = action.userVote;
-        debugger
         return newState;
       } else {
         return newState;
