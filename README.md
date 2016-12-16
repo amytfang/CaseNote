@@ -24,19 +24,19 @@ CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby o
 
 ### Opinions
 
-  #### Viewing opinions
+  **Viewing opinions**
 
   Users access opinions through either search or the opinions index in the navigation bar.
 
   ![image of opinion view](docs/screenshots/opinion-detail-view.png)
 
-  #### Creating opinions
+  **Creating opinions**
 
   Users can create opinions by clicking the "Add Opinion" link in the navigation bar.  Opinions require a case name, citation, judge, court, and date.  The judge and court fields are drop down menus populated from judge and court reference tables.  Optionally, the user can add an image when creating the opinion.  By default, the image will be an image of the selected judge.  CaseNote utilizes Amazon Web Services to store these images.
 
   ![image of opinion add page](docs/screenshots/add-opinion.png)
 
-  #### Adding comments
+  **Adding comments**
 
   User can comment on opinions.
 
@@ -44,7 +44,7 @@ CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby o
 
 ### Annotations
 
-  #### Viewing annotations
+  **Viewing annotations**
 
   In the text body of the opinions, annotations are distinguished by a gray background.  Users click on the annotation to view the details of that annotation in the right panel.
 
@@ -52,13 +52,14 @@ CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby o
 
   The user can vote on the annotation and make suggestions to refine the annotation. Users can also vote on suggestions.
 
-  ![image of suggestion form](docs/screenshots/annotation-detail-suggestions.png)
+  ![image of suggestion form](docs/screenshots/annotation-detail-suggestion.png)
 
-  #### Creating annotations
+  **Creating annotations**
 
   Users can create annotations by selecting the text in the opinion that they would like to annotate.  The right panel will display a button which allows users to start an annotation.
 
   ![image of annotation form button](docs/screenshots/annotation-form-start.png)
+
   ![image of annotation form full](docs/screenshots/annotation-form-full.png)
 
 ## Future Directions for the Project
