@@ -44,9 +44,11 @@ The user can vote on the annotation and make suggestions to refine the annotatio
 
 **Creating annotations**
 
-Users can create annotations by selecting the text in the opinion that they would like to annotate.  The right panel will display a button which allows users to start an annotation.
+Users can create annotations by selecting the text in the opinion that they would like to annotate.  The right panel will display a button which allows users to start an annotation.  
 
 ![image of annotation form button](docs/screenshots/annotation-form-start.png)
+
+Once the user submits the body of the annotation, CaseNote creates an Annotation object in the database that stores the `id`, `start_idx`, `length`, `body`, `user_id`, and `opinion_id`.  When the opinion is rendered, CaseNote uses a custom format in the Quill editor to render the annotations on the opinion text.
 
 ![image of annotation form full](docs/screenshots/annotation-form-full.png)
 
