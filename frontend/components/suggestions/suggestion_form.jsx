@@ -139,7 +139,7 @@ class SuggestionForm extends React.Component {
     } else {
       return (
         <div>
-          <button onClick={ this.handleLogIn }>Sign In to Make a Suggestion</button>
+          <button className="suggestion-sign-in" onClick={ this.handleLogIn }>Sign In to Make a Suggestion</button>
           <ModalWrapper
             isOpen={ this.state.modalOn }
             onRequestClose={ this.modalOff }

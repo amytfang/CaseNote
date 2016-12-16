@@ -12,7 +12,7 @@ class Api::AnnotationsController < ApplicationController
   end
 
   def show
-    @annotation = Annotation.find(params[:id])
+    @annotation = Annotation.where(id: params[:id]).includes(suggestions: [:user]).first
     render :show
   end
 

@@ -2,7 +2,7 @@ class Api::OpinionsController < ApplicationController
   before_action :check_logged_in, only: [:create, :update, :destroy]
 
   def index
-    @opinions = Opinion.all
+    @opinions = Opinion.all.includes(:court, :judge)
     render :index
   end
 
@@ -18,7 +18,7 @@ class Api::OpinionsController < ApplicationController
   end
 
   def show
-    @opinion = Opinion.find(params[:id])
+    @opinion = Opinion.where(id: params[:id]).includes(:court, :judge, :annotations, comments: [:user, votes: [:user]]).first
     render :show
   end
 

@@ -24,7 +24,8 @@ class OpinionDetailBody extends React.Component{
       selectionRange: null,
       selectionLocation: null,
       selectedAnnotationId: null,
-      clickLocation: null
+      clickLocation: null,
+      editMode: false,
      };
 
     this.showEditForm = this.showEditForm.bind(this);
@@ -36,10 +37,10 @@ class OpinionDetailBody extends React.Component{
     this.resetListener = this.resetListener.bind(this);
     this.setState = this.setState.bind(this);
     this.setPanel = this.setPanel.bind(this);
+    this.buttons = this.buttons.bind(this);
   }
 
   componentDidMount() {
-    $(".hidden-edit-button").hide();
     this.quill = new Quill('#edit-editor');
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
@@ -75,16 +76,14 @@ class OpinionDetailBody extends React.Component{
 
   showEditForm() {
     $(".opinion-detail-main-body").addClass("edit-mode");
-    $(".hidden-edit-button").show();
-    $(".unhidden-button").hide();
+    this.setState({ editMode: true });
     this.quill.enable(true);
     this.quill.off("selection-change");
   }
 
   hideEditForm() {
     $(".opinion-detail-main-body").removeClass("edit-mode");
-    $(".hidden-edit-button").hide();
-    $(".unhidden-button").show();
+    this.setState({ editMode: false });
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
@@ -204,38 +203,37 @@ class OpinionDetailBody extends React.Component{
     });
   }
 
+  buttons() {
+    const { currentUser, opinion } = this.props;
+    if (!currentUser) return null;
+
+    const editButton = (
+      <button className="unhidden-button" onClick={ this.showEditForm }>
+        Edit
+      </button>);
+
+    const deleteButton = (currentUser.id === opinion.transcriber_id) ?
+      <button onClick={ this.handleDelete }>Delete</button> : null;
+
+    const submitButton = (
+      <button className="hidden-edit-button" onClick={ this.handleSubmit }>
+        Submit
+      </button>);
+
+    const cancelButton = (
+      <button className="hidden-edit-button" onClick={ this.hideEditForm }>
+        Cancel
+      </button>);
+
+    if (this.state.editMode) {
+      return <div> { submitButton } { cancelButton } </div>;
+    } else {
+      return <div> { editButton } { deleteButton } </div>;
+    }
+  }
+
   render() {
     const { currentUser, opinion, formErrors } = this.props;
-
-    //TODO: refactor button logic
-    let transcriberButtons, loggedInButtons;
-    if (currentUser && currentUser.id === opinion.transcriber_id) {
-      transcriberButtons = <button
-        className="unhidden-button"
-        onClick={ this.handleDelete }>
-        Delete
-      </button>;
-    } else {
-      transcriberButtons = null;
-    }
-    if (currentUser) {
-      loggedInButtons = (
-        <div>
-          <button className="hidden-edit-button" onClick={ this.handleSubmit }>
-            Submit
-          </button>
-          <button className="hidden-edit-button" onClick={ this.hideEditForm }>
-            Cancel
-          </button>
-          <button className="unhidden-button" onClick={ this.showEditForm }>
-            Edit
-          </button>
-          { transcriberButtons }
-        </div>
-      );
-    } else {
-      loggedInButtons = null;
-    }
 
     let rightPanel;
     if (this.state.panelView === "opinion") {
@@ -259,7 +257,7 @@ class OpinionDetailBody extends React.Component{
         <section>
           <div id="edit-editor" className="opinion-detail-main-body">
           </div>
-          { loggedInButtons }
+          { this.buttons() }
 
           <section className="opinion-comment-section">
             <CommentFormContainer opinionId={this.props.params.opinionId} />
