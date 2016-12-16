@@ -24,7 +24,9 @@ class Search extends React.Component {
           { this.props.searchResults.map((opinion) =>
             <li key={opinion.id}>
               <Link to={`/opinions/${opinion.id}`}>
-                <span>{ opinion.case }, Written by Judge { opinion.name }</span>
+                <span className="search-result-case">{ opinion.case }, </span>
+                <span>{ opinion.citation }, </span>
+                <span className="search-result-name">{ opinion.name }</span>
               </Link>
             </li>) }
         </ul>
