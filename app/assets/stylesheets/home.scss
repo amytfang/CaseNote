@@ -15,7 +15,9 @@
   top: 10%;
   left: 0;
   right: 0;
-  margin: 30px 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1000px;
   font-size: 48px;
   font-weight: 700;
   white-space: pre-wrap;
@@ -24,10 +26,12 @@
 
 .search-container {
   position: absolute;
-  top: 30%;
+  top: 32%;
   left: 0;
   right: 0;
-  margin: 30px 200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
 }
 
 .search-container input {
