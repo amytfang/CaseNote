@@ -30,8 +30,8 @@ class SuggestionItem extends React.Component {
 
   handleEdit(e) {
     e.preventDefault();
-    const suggestion = Object.assign({}, this.props.suggestion, { body: this.state.body });
-    this.props.editSuggestion(suggestion);
+    const suggestion = { id: this.props.suggestion.id , body: this.state.body};
+    this.props.editSuggestion(suggestion).then(this.hideEdit);
   }
 
   hideEdit() {
@@ -83,9 +83,9 @@ class SuggestionItem extends React.Component {
 
             <form onSubmit={ this.handleEdit }>
               <textarea
-                value={ suggestion.body }
+                value={ this.state.body }
                 onChange={ this.update('body') }/>
-              <button>Submit</button> <button onClick={ this.hideEdit }>Cancel</button>
+              <button>Submit</button>
             </form>
             <VoteContainer
               numVotes={ suggestion.numVotes }

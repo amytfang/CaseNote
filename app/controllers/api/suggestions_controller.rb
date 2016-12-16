@@ -11,7 +11,7 @@ class Api::SuggestionsController < ApplicationController
 
   def update
     @suggestion = Suggestion.find(params[:id])
-    if @suggestion.updated(suggestion_params)
+    if @suggestion.update(suggestion_params)
       render :show
     else
       render json: @suggestion.errors.messages, status: 422
