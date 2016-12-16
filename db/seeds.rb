@@ -44,7 +44,7 @@ annotation11 = Annotation.create(start_idx: 290, length: 100, body: "{\"ops\":[{
 annotation12 = Annotation.create(start_idx: 40, length: 10, body: "{\"ops\":[{\"insert\":\"Annotation12\\n\"}]}", opinion_id: opinion8.id, user_id: user4.id)
 annotation13 = Annotation.create(start_idx: 8, length: 200, body: "{\"ops\":[{\"insert\":\"Annotation13\\n\"}]}", opinion_id: opinion9.id, user_id: user3.id)
 annotation14 = Annotation.create(start_idx: 500, length: 174, body: "{\"ops\":[{\"insert\":\"Annotation14\\n\"}]}", opinion_id: opinion9.id, user_id: user3.id)
-annotation15 = Annotation.create(start_idx: 10, length: 300, body: "{\"ops\":[{\"insert\":\"Annotation15\\n\"}]}", opinion_id: opinion10.id, user_id: user1.id)
+annotation15 = Annotation.create(start_idx: 300, length: 10, body: "{\"ops\":[{\"insert\":\"Annotation15\\n\"}]}", opinion_id: opinion9.id, user_id: user1.id)
 
 Suggestion.destroy_all
 
