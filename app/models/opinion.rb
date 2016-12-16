@@ -35,7 +35,10 @@ class Opinion < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   def self.search(term)
-    Opinion.select(:id, :case, :citation, "judges.name").joins(:judge).where("opinions.case LIKE ? OR judges.name LIKE ? OR opinions.citation LIKE ?", "#{term}%", "#{term}%", "#{term}%")
+    Opinion
+      .select(:id, :case, :citation, "judges.name")
+      .joins(:judge)
+      .where("lower(opinions.case) LIKE ? OR lower(judges.name) LIKE ? OR lower(opinions.citation) LIKE ?", "#{term.downcase}%", "#{term.downcase}%", "#{term.downcase}%")
   end
 
   def citation_format

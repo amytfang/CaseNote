@@ -10,9 +10,15 @@ class Search extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ query: e.currentTarget.value }, () => {
-      this.props.searchOpinions( this.state.query );
-    });
+    if (e.currentTarget.value === "") {
+      this.setState({ query: e.currentTarget.value }, () => {
+        this.props.clearSearchResults();
+      });
+    } else {
+      this.setState({ query: e.currentTarget.value }, () => {
+        this.props.searchOpinions( this.state.query );
+      });
+    }
   }
 
   resultList() {
