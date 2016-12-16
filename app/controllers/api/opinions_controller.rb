@@ -40,6 +40,11 @@ class Api::OpinionsController < ApplicationController
     end
   end
 
+  def search
+    @opinions = Opinion.search(params[:query])
+    render json: @opinions.to_json
+  end
+
   private
 
   def opinion_params

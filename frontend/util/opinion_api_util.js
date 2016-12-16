@@ -34,3 +34,11 @@ export const deleteOpinion = (id) => {
     url: `/api/opinions/${id}`
   });
 };
+
+export const searchOpinions = (query) => {
+  return $.ajax({
+    type: "GET",
+    url: '/api/opinions/search',
+    data: {query}
+  });
+};

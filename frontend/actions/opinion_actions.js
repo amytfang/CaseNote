@@ -1,5 +1,6 @@
 import * as APIUtil from '../util/opinion_api_util';
 import { clearErrors, requestToServer } from './general_actions';
+import { clearSearchResults } from './search_actions';
 import { withRouter } from 'react-router';
 
 export const RECEIVE_ALL_OPINIONS = "RECEIVE_ALL_OPINIONS";
@@ -25,7 +26,10 @@ export function fetchAllOpinions() {
   return (dispatch) => {
     dispatch(requestToServer());
     return APIUtil.fetchAllOpinions().then(
-      (opinions) => dispatch(receiveAllOpinions(opinions)),
+      (opinions) => {
+        dispatch(clearSearchResults());
+        dispatch(receiveAllOpinions(opinions));
+      },
       (errors) => dispatch(receiveOpinionErrors(errors.responseJSON))
     );
   };
@@ -35,7 +39,10 @@ export function fetchSingleOpinion(id) {
   return (dispatch) => {
     dispatch(requestToServer());
     return APIUtil.fetchSingleOpinion(id).then(
-      (opinion) => dispatch(receiveSingleOpinion(opinion)),
+      (opinion) => {
+        dispatch(clearSearchResults());
+        dispatch(receiveSingleOpinion(opinion));
+      },
       (errors) => dispatch(receiveOpinionErrors(errors.responseJSON))
     );
   };

@@ -1,0 +1,47 @@
+.landing-page {
+  height: 100vh;
+  width:100%;
+  position: relative;
+  background-color: #ffff64;
+  background-image: image_url("scales.png");
+  background-size: 20%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  background-position: 90% 90%;
+}
+
+.landing-page .landing-page-greeting {
+  position: absolute;
+  top: 10%;
+  left: 0;
+  right: 0;
+  margin: 30px 100px;
+  font-size: 48px;
+  font-weight: 700;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.search-container {
+  position: absolute;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: 30px 200px;
+}
+
+.search-container input {
+  background-color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.search-result-list a {
+  padding: 10px;
+  background: #ccc;
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #aaa;
+  font-size: 18px;
+}

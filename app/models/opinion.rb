@@ -34,6 +34,10 @@ class Opinion < ActiveRecord::Base
   has_attached_file :image, styles: { large: "600x600>", thumb: "100x100>" }, default_url: "https://s3.us-east-2.amazonaws.com/casenote-assets/default.jpg"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
+  def self.search(term)
+    Opinion.select(:id, :case, "judges.name").joins(:judge).where("opinions.case LIKE ? OR judges.name LIKE ?", "#{term}%", "#{term}%")
+  end
+
   def citation_format
     self.case + ", " + self.citation + " (#{self.court.citation} #{self.date.year})"
   end
