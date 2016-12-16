@@ -10,12 +10,9 @@ class Search extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ query: e.target.value });
-    if (this.state.query === "") {
-      this.props.clearSearchResults();
-    } else {
+    this.setState({ query: e.currentTarget.value }, () => {
       this.props.searchOpinions( this.state.query );
-    }
+    });
   }
 
   resultList() {
@@ -37,7 +34,6 @@ class Search extends React.Component {
 
 
   render() {
-
     return (
       <div className="search-container">
         <form>

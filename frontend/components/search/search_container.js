@@ -5,9 +5,10 @@ import {
 import { connect } from 'react-redux';
 import Search from './search';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => {
+  return({
   searchResults: state.searchResults,
-});
+});};
 
 const mapDispatchToProps = (dispatch) => ({
   searchOpinions: (query) => dispatch(searchOpinions(query)),
