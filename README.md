@@ -36,7 +36,7 @@ CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby o
 
   ![image of opinion add page](docs/screenshots/add-opinion.png)
 
-  ### Adding comments
+  #### Adding comments
 
   User can comment on opinions.
 
