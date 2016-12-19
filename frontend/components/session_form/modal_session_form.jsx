@@ -14,7 +14,15 @@ class ModalSessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user).then(() => this.props.modalOff());
+    this.props.processForm(user).then(
+      () => {
+        if (this.props.updateAnnotationDetail)
+          this.props.fetchAnnotation(this.props.updateAnnotationDetail);
+        if (this.props.updateOpinionDetail)
+          this.props.fetchSingleOpinion(this.props.updateOpinionDetail);
+        this.props.modalOff();
+      }
+    );
   }
 
   handleChange(field) {
@@ -24,7 +32,14 @@ class ModalSessionForm extends React.Component {
   guestLogin() {
     this.props
       .signin({ username: "guest", password: "password"})
-      .then(() => this.props.modalOff());
+      .then(() => {
+        if (this.props.updateAnnotationDetail)
+          this.props.fetchAnnotation(this.props.updateAnnotationDetail);
+        if (this.props.updateOpinionDetail)
+          this.props.fetchSingleOpinion(this.props.updateOpinionDetail);
+        this.props.modalOff();
+      });
+
   }
 
   render() {
@@ -43,7 +58,6 @@ class ModalSessionForm extends React.Component {
       </div> : null;
     const credentialErrors = (errors.login) ?
       <div className="login-error">{ errors.login[0] }</div> : null;
-
 
     const guest = <a onClick={ this.guestLogin }>Login as Guest</a>;
 

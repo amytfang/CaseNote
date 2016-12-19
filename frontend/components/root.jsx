@@ -4,7 +4,6 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 import App from './app';
 import Home from './home';
-import SessionFormContainer from './session_form/session_form_container';
 import OpinionIndexContainer from './opinions/opinion_index_container';
 import OpinionCreateFormContainer from './opinions/opinion_create_form_container';
 import OpinionDetailContainer from './opinions/opinion_detail_container';
