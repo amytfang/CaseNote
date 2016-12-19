@@ -19,7 +19,7 @@ class Suggestion < ActiveRecord::Base
     in: %w(restate missing stretch other),
     message: "Invalid suggestion type"
   }
-  validates_presence_of :body, :if => lambda { |o| o.suggestion_type != "other" }
+  validates_presence_of :body, :if => lambda { |o| o.suggestion_type == "other" }
 
   belongs_to :user
   belongs_to :annotation

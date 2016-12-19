@@ -22,16 +22,20 @@ class AnnotationForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const annotation = {
-      body: JSON.stringify(this.quill.getContents()),
-      start_idx: this.props.range.index,
-      length: this.props.range.length,
-      opinion_id: this.props.opinionId
-    };
-    this.props.createAnnotation(annotation).then((anno) => {
-      this.setState({ annotateMode: false, modalOn: false });
-      this.props.setPanel("annoDetail");
-    });
+    if (this.quill.getText() === "\n") {
+      this.props.receiveAnnotationErrors({"body": ["can't be blank"]});
+    } else {
+      const annotation = {
+        body: JSON.stringify(this.quill.getContents()),
+        start_idx: this.props.range.index,
+        length: this.props.range.length,
+        opinion_id: this.props.opinionId
+      };
+      this.props.createAnnotation(annotation).then((anno) => {
+        this.setState({ annotateMode: false, modalOn: false });
+        this.props.setPanel("annoDetail");
+      });
+    }
   }
 
   startAnnotateMode(e) {

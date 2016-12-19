@@ -26,10 +26,30 @@
 
 .header-user-links li {
   float: left;
-  padding: 14px 10px;
+  height: 40px;
+}
+
+.header-user-name {
+  padding: 14px 10px 13px 10px;
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 500;
+  float:left;
+}
+
+.header-user-links a {
+  padding: 14px 10px 8px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-bottom: 5px solid #ffff64;
+  float:left;
+  -webkit-transition: .2s border-bottom;
+  transition: .2s border-bottom;
+}
+
+.header-user-links a:hover {
+  border-bottom: 5px solid #ff0fab;
 }
 
 .header-nav {

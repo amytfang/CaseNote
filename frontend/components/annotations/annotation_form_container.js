@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { createAnnotation } from '../../actions/annotation_actions';
+import {
+  createAnnotation,
+  receiveAnnotationErrors
+} from '../../actions/annotation_actions';
 import AnnotationForm from './annotation_form';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -11,7 +14,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createAnnotation: (anno) => dispatch(createAnnotation(anno))
+  createAnnotation: (anno) => dispatch(createAnnotation(anno)),
+  receiveAnnotationErrors: (errors) => dispatch(receiveAnnotationErrors(errors))
 });
 
 export default connect(

@@ -47,7 +47,7 @@ class Search extends React.Component {
         <form>
           <input
             type="text"
-            placeholder="Start Typing to Get Started"
+            placeholder="Search by case name, citation, or judge"
             value={ this.state.query }
             onChange={ this.handleChange }
             className="search-input"/>

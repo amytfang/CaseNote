@@ -43,7 +43,7 @@ class Header extends React.Component {
       userLinks = (
         <ul className="header-user-links">
           <li className="icon-list-item"><Thumb imageURL={ this.props.currentUser.thumb } currentUser="true" /></li>
-          <li>{ this.props.currentUser.username }</li>
+          <li className="header-user-name">{ this.props.currentUser.username }</li>
           <li onClick={ this.props.logout }><a>Sign Out</a></li>
         </ul>
       );

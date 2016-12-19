@@ -70,7 +70,7 @@ class SuggestionForm extends React.Component {
               name="suggestion_type"
               value="restate"
               checked={ this.state.suggestion_type === "restate"}
-              onClick={ this.update('suggestion_type')} />
+              onChange={ this.update('suggestion_type')} />
             <label htmlFor="restate">Restates the text</label>
           </div>
           <div className="suggestion-form-radio-option">
@@ -80,7 +80,7 @@ class SuggestionForm extends React.Component {
               name="suggestion_type"
               value="missing"
               checked={ this.state.suggestion_type === "missing"}
-              onClick={ this.update('suggestion_type')}  />
+              onChange={ this.update('suggestion_type')}  />
             <label htmlFor="missing">Missing something</label>
           </div>
           <div className="suggestion-form-radio-option">
@@ -90,7 +90,7 @@ class SuggestionForm extends React.Component {
               name="suggestion_type"
               value="stretch"
               checked={ this.state.suggestion_type === "stretch"}
-              onClick={ this.update('suggestion_type')}  />
+              onChange={ this.update('suggestion_type')}  />
             <label htmlFor="stretch">It's a stretch</label>
           </div>
           <div className="suggestion-form-radio-option">
@@ -100,7 +100,7 @@ class SuggestionForm extends React.Component {
               name="suggestion_type"
               value="other"
               checked={ this.state.suggestion_type === "other"}
-              onClick={ this.update('suggestion_type')} />
+              onChange={ this.update('suggestion_type')} />
             <label htmlFor="other">Other</label>
           </div>
         </div>
@@ -122,6 +122,14 @@ class SuggestionForm extends React.Component {
 
   render() {
     if (this.props.currentUser) {
+      let placeholder;
+      if (!this.state.fullForm) {
+        placeholder = "Suggest an improvement";
+      } else {
+        placeholder = (this.state.suggestion_type === "other") ?
+        "Suggest an improvement (required)" : "Suggest an improvement (optional)";
+      }
+
       return(
         <div>
           { this.loginButton() }
@@ -129,7 +137,7 @@ class SuggestionForm extends React.Component {
             { this.typeButtons() }
             <textarea
               value={ this.state.body }
-              placeholder="Suggest an improvement"
+              placeholder={ placeholder }
               onFocus={ this.showFullForm }
               onChange={ this.update('body')} />
             { this.submitButtons() }
