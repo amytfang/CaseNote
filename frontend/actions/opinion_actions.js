@@ -1,11 +1,12 @@
 import * as APIUtil from '../util/opinion_api_util';
-import { clearErrors, requestToServer } from './general_actions';
+import { clearErrors } from './general_actions';
 import { clearSearchResults } from './search_actions';
 import { withRouter } from 'react-router';
 
 export const RECEIVE_ALL_OPINIONS = "RECEIVE_ALL_OPINIONS";
 export const RECEIVE_SINGLE_OPINION = "RECEIVE_SINGLE_OPINION";
 export const RECEIVE_OPINION_ERRORS = "RECEIVE_OPINION_ERRORS";
+export const CLEAR_OPINION = "CLEAR_OPINION";
 
 export const receiveAllOpinions = (opinions) => ({
   type: RECEIVE_ALL_OPINIONS,
@@ -22,9 +23,12 @@ export const receiveOpinionErrors = (errors) => ({
   errors
 });
 
+export const clearOpinion = () => ({
+  type: CLEAR_OPINION,
+});
+
 export function fetchAllOpinions() {
   return (dispatch) => {
-    dispatch(requestToServer());
     return APIUtil.fetchAllOpinions().then(
       (opinions) => {
         dispatch(clearSearchResults());
@@ -37,7 +41,6 @@ export function fetchAllOpinions() {
 
 export function fetchSingleOpinion(id) {
   return (dispatch) => {
-    dispatch(requestToServer());
     return APIUtil.fetchSingleOpinion(id).then(
       (opinion) => {
         dispatch(clearSearchResults());
@@ -59,7 +62,6 @@ export function createOpinion(opinion) {
 
 export function editOpinion(opinion) {
   return (dispatch) => {
-    dispatch(requestToServer());
     return APIUtil.editOpinion(opinion).then(
       (op) => dispatch(receiveSingleOpinion(op)),
       (errors) => dispatch(receiveOpinionErrors(errors.responseJSON))
@@ -69,7 +71,6 @@ export function editOpinion(opinion) {
 
 export function deleteOpinion(id) {
   return (dispatch) => {
-    dispatch(requestToServer());
     return APIUtil.deleteOpinion(id);
   };
 }

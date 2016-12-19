@@ -1,4 +1,7 @@
-import { RECEIVE_SINGLE_OPINION } from '../actions/opinion_actions';
+import {
+  RECEIVE_SINGLE_OPINION,
+  CLEAR_OPINION
+} from '../actions/opinion_actions';
 import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comment_actions';
 import { RECEIVE_ANNOTATION,
   REMOVE_ANNOTATION
@@ -44,6 +47,8 @@ const opinionDetailReducer = (state = {}, action) => {
       } else {
         return newState;
       }
+    case CLEAR_OPINION:
+      return {};
     case REMOVE_COMMENT:
     default:
       return newState;

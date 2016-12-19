@@ -45,7 +45,9 @@ class SuggestionItem extends React.Component {
   links() {
     const { currentUser, suggestion } = this.props;
 
-    if (currentUser === null || currentUser.id !== suggestion.user.id) {
+    if (currentUser === null ||
+      currentUser.id !== suggestion.user.id ||
+      this.state.editMode){
       return null;
     } else {
       return <div className="suggestion-user-links">
@@ -59,70 +61,43 @@ class SuggestionItem extends React.Component {
     return e => this.setState({ [property]: e.target.value });
   }
 
-
   render() {
     const { suggestion } = this.props;
 
-    //TODO: refactor
-    if (this.state.editMode) {
-      return(
-        <li className="suggestion-item">
-          <div>
-            <header className="suggestion-header group">
-              <div className="suggestion-header-left">
-                <Thumb imageURL={ suggestion.user.image } currentUser={false} />
-                <h4>{ suggestion.user.username }</h4>
-                <h5>
-                  Marked as <span>{
-                    SUGGESTION_TYPES[suggestion.suggestion_type]
-                  }</span>
-                </h5>
-              </div>
-              <span>{ timeSince(suggestion.created_at)} ago</span>
-            </header>
+    const body = this.state.editMode ?
+      <form onSubmit={ this.handleEdit }>
+        <textarea
+          value={ this.state.body }
+          onChange={ this.update('body') }/>
+        <button>Submit</button>
+      </form> : <p>{ suggestion.body }</p> ;
 
-            <form onSubmit={ this.handleEdit }>
-              <textarea
-                value={ this.state.body }
-                onChange={ this.update('body') }/>
-              <button>Submit</button>
-            </form>
-            <VoteContainer
-              numVotes={ suggestion.numVotes }
-              userVote={ suggestion.userVote }
-              votableId={ suggestion.id }
-              votableType="Suggestion"/>
-          </div>
-        </li>
-      );
-    } else {
-      return(
-        <li className="suggestion-item">
-          <div>
-            <header className="suggestion-header group">
-              <div className="suggestion-header-left">
-                <Thumb imageURL={ suggestion.user.image } currentUser={false} />
-                <h4>{ suggestion.user.username }</h4>
-                <h5>
-                  Marked as <span>{
-                    SUGGESTION_TYPES[suggestion.suggestion_type]
-                  }</span>
-                </h5>
-              </div>
-              <span>{ timeSince(suggestion.created_at)} ago</span>
-            </header>
+    return (
+      <li className="suggestion-item">
+        <div>
+          <header className="suggestion-header group">
+            <div className="suggestion-header-left">
+              <Thumb imageURL={ suggestion.user.image } currentUser={false} />
+              <h4>{ suggestion.user.username }</h4>
+              <h5>
+                Marked as <span>{
+                  SUGGESTION_TYPES[suggestion.suggestion_type]
+                }</span>
+              </h5>
+            </div>
+            <span>{ timeSince(suggestion.created_at)} ago</span>
+          </header>
 
-            <p>{ suggestion.body }</p>
-          </div>
-          <VoteContainer
-            numVotes={ suggestion.numVotes }
-            userVote={ suggestion.userVote }
-            votableId={ suggestion.id }
-            votableType="Suggestion"/>
-          { this.links() }
-        </li>
-      );
-    }
+          { body }
+        </div>
+        <VoteContainer
+          numVotes={ suggestion.numVotes }
+          userVote={ suggestion.userVote }
+          votableId={ suggestion.id }
+          votableType="Suggestion"/>
+        { this.links() }
+      </li>
+    );
   }
 }
 

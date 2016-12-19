@@ -1,5 +1,5 @@
 import * as APIUtil from '../util/vote_api_util';
-import { clearErrors, requestToServer } from './general_actions';
+import { clearErrors } from './general_actions';
 
 export const RECEIVE_ANNOTATION_VOTE = "RECEIVE_ANNOTATION_VOTE";
 export const RECEIVE_SUGGESTION_VOTE = "RECEIVE_SUGGESTION_VOTE";
@@ -25,7 +25,6 @@ export const receiveCommentVote = (userVote, id) => ({
 
 export function downvoteAnnotation(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.downvoteAnnotation(id).then(
       (userVote) => dispatch(receiveAnnotationVote(userVote, id))
     );
@@ -34,7 +33,6 @@ export function downvoteAnnotation(id) {
 
 export function upvoteAnnotation(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.upvoteAnnotation(id).then(
       (userVote) => dispatch(receiveAnnotationVote(userVote, id))
     );
@@ -43,7 +41,6 @@ export function upvoteAnnotation(id) {
 
 export function downvoteSuggestion(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.downvoteSuggestion(id).then(
       (userVote) => dispatch(receiveSuggestionVote(userVote, id))
     );
@@ -52,7 +49,6 @@ export function downvoteSuggestion(id) {
 
 export function upvoteSuggestion(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.upvoteSuggestion(id).then(
       (userVote) => dispatch(receiveSuggestionVote(userVote, id))
     );
@@ -61,7 +57,6 @@ export function upvoteSuggestion(id) {
 
 export function downvoteComment(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.downvoteComment(id).then(
       (userVote) => dispatch(receiveCommentVote(userVote, id))
     );
@@ -70,7 +65,6 @@ export function downvoteComment(id) {
 
 export function upvoteComment(id) {
   return (dispatch) => {
-    dispatch(requestToServer);
     return APIUtil.upvoteComment(id).then(
       (userVote) => dispatch(receiveCommentVote(userVote, id))
     );

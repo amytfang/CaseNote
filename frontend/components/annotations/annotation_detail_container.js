@@ -11,7 +11,6 @@ import AnnotationDetail from './annotation_detail';
 const mapStateToProps = (state, ownProps) => {
   const annotationId = (ownProps.annotationId) ? ownProps.annotationId : state.annotationDetail.id ;
   return ({
-    loading: state.loading,
     annotationId: ownProps.annotationId,
     currentUser: state.currentUser,
     annotationDetail: state.annotationDetail,
