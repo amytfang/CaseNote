@@ -26,6 +26,10 @@
   border: 4px solid #000;
 }
 
+.opinion-index-item:nth-child(n+10) a div {
+  padding: 10px 9px;
+}
+
 .opinion-index-item img {
   float: left;
   height: 87px;
