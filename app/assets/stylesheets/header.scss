@@ -58,17 +58,24 @@
   text-align: center;
   color: #fff;
   text-transform: uppercase;
+  height: 35px;
+  position: relative;
 }
 
 .header-nav li {
   display: inline-block;
+}
+
+.header-nav a {
+  position: relative;
+  top: 6px;
   font-size: 12px;
   padding: 10px 20px;
   letter-spacing: 1px;
   font-weight: 300;
 }
 
-.header-nav li:hover {
+.header-nav a:hover {
   color: #99a7ee;
 }
 

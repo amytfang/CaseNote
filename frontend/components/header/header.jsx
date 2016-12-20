@@ -63,7 +63,7 @@ class Header extends React.Component {
           { userLinks }
         </header>
 
-        <ul className="header-nav">
+        <ul className="header-nav group">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/index">All Opinions</Link></li>
           <li><Link onClick={ this.checkLoggedIn }>Add Opinion</Link></li>
