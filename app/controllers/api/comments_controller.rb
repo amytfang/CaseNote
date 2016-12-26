@@ -1,4 +1,5 @@
 class Api::CommentsController < ApplicationController
+  before_action :check_logged_in, only: [:create, :destroy, :downvote, :upvote]
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id

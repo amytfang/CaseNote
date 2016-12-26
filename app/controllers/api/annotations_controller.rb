@@ -1,5 +1,5 @@
 class Api::AnnotationsController < ApplicationController
-  # before_action :check_logged_in, only: [:create, :update, :destroy]
+  before_action :check_logged_in, only: [:create, :update, :destroy, :downvote, :upvote]
 
   def create
     @annotation = Annotation.new(annotation_params)

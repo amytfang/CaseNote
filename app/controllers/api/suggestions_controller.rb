@@ -1,4 +1,5 @@
 class Api::SuggestionsController < ApplicationController
+  before_action :check_logged_in, only: [:create, :update, :destroy, :downvote, :upvote]
   def create
     @suggestion = Suggestion.new(suggestion_params)
     @suggestion.user_id = current_user.id
