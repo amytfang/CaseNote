@@ -4,7 +4,9 @@ json.user do
   json.image @annotation.user.avatar.url(:thumb)
 end
 json.suggestions do
-  @annotation.suggestions.each do |suggestion|
+  @annotation.suggestions
+  .includes(:user)
+  .each do |suggestion|
     json.set! suggestion.id do
       json.extract! suggestion, :id, :body, :annotation_id, :suggestion_type, :created_at
       json.numVotes suggestion.num_votes

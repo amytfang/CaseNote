@@ -18,7 +18,7 @@ class Api::OpinionsController < ApplicationController
   end
 
   def show
-    @opinion = Opinion.where(id: params[:id]).includes(:court, :judge, :annotations, comments: [:user, votes: [:user]]).first
+    @opinion = Opinion.where(id: params[:id]).includes(:court, :judge, :transcriber, :annotations, comments: [:user, votes: [:user]]).first
     render :show
   end
 
