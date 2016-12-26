@@ -22,7 +22,13 @@ class Search extends React.Component {
   }
 
   resultList() {
-    if (!this.props.searchResults || this.props.searchResults.length === 0) {
+    if (this.props.searchResults.length === 0 && this.state.query.length > 2) {
+      return (
+        <ul className="search-result-list">
+          <li key="-1"><span className="no-results">No Results Found</span></li>
+        </ul>
+      );
+    } else if (!this.props.searchResults || this.props.searchResults.length === 0) {
       return null;
     } else {
       return (
