@@ -12,7 +12,7 @@ CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby o
 
 ### Opinions
 
-On the database side, court opinions are stored in one table which contains columss for `id`, `case`, `citation`, `date`, `body`, `transcriber_id`, `judge_id`, `court_id`, and `image`.  User have access to read all Opinions on the site, but can only comment, annotate, or edit opinions upon log in.  
+On the database side, court opinions are stored in one table which contains columns for `id`, `case`, `citation`, `date`, `body`, `transcriber_id`, `judge_id`, `court_id`, and `image`.  User have access to read all Opinions on the site, but can only comment, annotate, or edit opinions upon log in.  
 
 **Viewing opinions**
 
