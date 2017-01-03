@@ -63,7 +63,7 @@ class OpinionDetailBody extends React.Component{
 
   resetListener() {
     $("body").click((e) =>  {
-      if ($(e.target).closest('.modal-session-form').length) {
+      if ($(e.target).closest('.ReactModal__Content').length) {
         return;
       } else if (!$(e.target).closest('#opinion-detail-main-panel').length &&
         !$(e.target).hasClass("opinion-annotation")) {
