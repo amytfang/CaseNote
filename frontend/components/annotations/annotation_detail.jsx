@@ -1,6 +1,5 @@
 import React from 'react';
 import Quill from 'quill';
-import {withRouter} from 'react-router';
 import SuggestionFormContainer from '../suggestions/suggestion_form_container';
 import SuggestionIndex from '../suggestions/suggestion_index';
 import VoteContainer from '../votes/vote_container';
@@ -8,7 +7,7 @@ import VoteContainer from '../votes/vote_container';
 class AnnotationDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { editMode: false };
+    this.state = { editorClass: "" };
 
     this.showEditForm = this.showEditForm.bind(this);
     this.hideEditForm = this.hideEditForm.bind(this);
@@ -17,7 +16,8 @@ class AnnotationDetail extends React.Component {
   }
 
   componentDidMount() {
-    this.quill = new Quill('#anno-editor');
+    this.editor = document.getElementById("anno-editor");
+    this.quill = new Quill(this.editor);
     if (this.props.annotationDetail.body) {
       this.quill.setContents(JSON.parse(this.props.annotationDetail.body));
     } else {
@@ -46,20 +46,17 @@ class AnnotationDetail extends React.Component {
     }
   }
 
-
   showEditForm(e) {
     e.preventDefault();
-    $("#anno-editor").addClass("edit-mode");
     this.quill.enable(true);
-    this.setState({ editMode: true });
+    this.setState({ editorClass: "edit-mode" });
   }
 
   hideEditForm(e) {
     if (e) e.preventDefault();
-    $("#anno-editor").removeClass("edit-mode");
     this.quill.setContents(JSON.parse(this.props.annotationDetail.body));
     this.quill.enable(false);
-    this.setState({ editMode: false });
+    this.setState({ editorClass: "" });
   }
 
   handleSubmit(e) {
@@ -115,7 +112,7 @@ class AnnotationDetail extends React.Component {
       </div>
     );
 
-    return this.state.editMode ? editButtons : initialButtons;
+    return this.state.editorClass !== "" ? editButtons : initialButtons;
   }
 
   contributors() {
@@ -139,7 +136,6 @@ class AnnotationDetail extends React.Component {
     }
   }
 
-
   render() {
     const sectionStyle = {
       top: `${ this.props.locationY }px`
@@ -150,7 +146,7 @@ class AnnotationDetail extends React.Component {
         <div className="annotation-detail-view-header">
           Annotation by { this.contributors() }
         </div>
-        <div id="anno-editor">
+        <div id="anno-editor" className={ this.state.editorClass }>
         </div>
         { this.buttons() }
         <VoteContainer
@@ -167,4 +163,4 @@ class AnnotationDetail extends React.Component {
 
 }
 
-export default withRouter(AnnotationDetail);
+export default AnnotationDetail;

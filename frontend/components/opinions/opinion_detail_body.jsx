@@ -25,7 +25,7 @@ class OpinionDetailBody extends React.Component{
       selectionLocation: null,
       selectedAnnotationId: null,
       clickLocation: null,
-      editMode: false,
+      editorClass: "",
      };
 
     this.showEditForm = this.showEditForm.bind(this);
@@ -45,7 +45,10 @@ class OpinionDetailBody extends React.Component{
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
-    $(".opinion-annotation").on("click", this.displayAnnotation );
+    const annotations = document.getElementsByClassName("opinion-annotation");
+    Array.from(annotations).forEach(el => {
+      el.addEventListener("click", this.displayAnnotation);
+    });
     this.resetListener();
   }
 
@@ -57,7 +60,10 @@ class OpinionDetailBody extends React.Component{
     if (this.props.opinion.body !== nextProps.opinion.body ||
       !isEqual(this.props.opinion.annotations, nextProps.opinion.annotations)) {
       this.quill.setContents(this.processAnnotations(nextProps.opinion));
-      $(".opinion-annotation").on("click", this.displayAnnotation );
+      const annotations = document.getElementsByClassName("opinion-annotation");
+      Array.from(annotations).forEach(el => {
+        el.addEventListener("click", this.displayAnnotation);
+      });
     }
   }
 
@@ -75,19 +81,20 @@ class OpinionDetailBody extends React.Component{
   }
 
   showEditForm() {
-    $(".opinion-detail-main-body").addClass("edit-mode");
-    this.setState({ editMode: true });
+    this.setState({ editorClass: "edit-mode" });
     this.quill.enable(true);
     this.quill.off("selection-change");
   }
 
   hideEditForm() {
-    $(".opinion-detail-main-body").removeClass("edit-mode");
-    this.setState({ editMode: false });
+    this.setState({ editorClass: "" });
     this.quill.setContents(this.processAnnotations());
     this.quill.enable(false);
     this.quill.on("selection-change", this.handleSelection );
-    $(".opinion-annotation").on("click", this.displayAnnotation );
+    const annotations = document.getElementsByClassName("opinion-annotation");
+    Array.from(annotations).forEach(el => {
+      el.addEventListener("click", this.displayAnnotation);
+    });
   }
 
   parseAnnotations(updatedContents) {
@@ -225,7 +232,7 @@ class OpinionDetailBody extends React.Component{
         Cancel
       </button>);
 
-    if (this.state.editMode) {
+    if (this.state.editorClass !== "") {
       return <div> { submitButton } { cancelButton } </div>;
     } else {
       return <div> { editButton } { deleteButton } </div>;
@@ -255,7 +262,7 @@ class OpinionDetailBody extends React.Component{
     return(
       <main className="opinion-detail-main">
         <section>
-          <div id="edit-editor" className="opinion-detail-main-body">
+          <div id="edit-editor" className={ this.state.editorClass }>
           </div>
           { this.buttons() }
 

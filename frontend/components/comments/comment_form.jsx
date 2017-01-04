@@ -6,7 +6,7 @@ class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullForm: false,
+      formClass: "",
       body: "",
       modalOn: false
     };
@@ -26,16 +26,14 @@ class CommentForm extends React.Component {
     };
 
     this.props.createComment(comment).then(() => {
-      this.setState({ fullForm: false, body: ""});
-      $(".comment-form").removeClass("full-mode");
+      this.setState({ formClass: "", body: ""});
     });
 
   }
 
   showFullForm(e) {
     e.preventDefault();
-    this.setState({ fullForm: true });
-    $(".comment-form").addClass("full-mode");
+    this.setState({ formClass: "full-mode" });
   }
 
   modalOff() {
@@ -53,7 +51,8 @@ class CommentForm extends React.Component {
   }
 
   render() {
-    const button = this.state.fullForm ? <button>Submit</button> : null;
+
+    const button = this.state.formClass === "" ? null : <button>Submit</button>;
     if (!this.props.currentUser) {
       return (
       <div className="group">
@@ -64,8 +63,10 @@ class CommentForm extends React.Component {
           formType="signin" />
       </div>);
     } else {
+      const formClasses = `comment-form group ${this.state.formClass}`;
+
       return(
-        <form onSubmit={ this.handleSubmit } className="comment-form group">
+        <form onSubmit={ this.handleSubmit } className={ formClasses }>
           <div>
             <Thumb imageURL={ this.props.currentUser.thumb } currentUser="true" />
             <textarea

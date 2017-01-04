@@ -37,21 +37,33 @@ class Header extends React.Component {
   }
 
   render() {
+    const { currentUser, logout } = this.props;
     let userLinks;
 
-    if (this.props.currentUser) {
+    if (currentUser) {
       userLinks = (
         <ul className="header-user-links">
-          <li className="icon-list-item"><Thumb imageURL={ this.props.currentUser.thumb } currentUser="true" /></li>
-          <li className="header-user-name">{ this.props.currentUser.username }</li>
-          <li onClick={ this.props.logout }><a>Sign Out</a></li>
+          <li className="icon-list-item">
+            <Thumb imageURL={ currentUser.thumb } currentUser="true" />
+          </li>
+          <li className="header-user-name">{ currentUser.username }</li>
+          <li onClick={ logout }><a>Sign Out</a></li>
         </ul>
       );
     } else {
       userLinks = (
         <ul className="header-user-links">
-          <li><a href="#" name="signup" onClick={this.handleSessionClick}>Sign Up</a></li>
-          <li><a href="#" name="signin" onClick={this.handleSessionClick}>Sign In</a></li>
+          <li>
+            <a href="#" name="signup" onClick={this.handleSessionClick}>
+              Sign Up
+            </a>
+          </li>
+
+          <li>
+            <a href="#" name="signin" onClick={this.handleSessionClick}>
+              Sign In
+            </a>
+          </li>
         </ul>
       );
     }

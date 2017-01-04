@@ -23,25 +23,30 @@ class ModalWrapper extends React.Component {
   render() {
     let otherOptionLink;
     if (this.state.formType) {
-      let linkType = this.state.formType === 'signin' ? 'Create An Account' : 'Already Have an Account? Sign In Here';
+      let linkType = this.state.formType === 'signin' ?
+        'Create An Account' : 'Already Have an Account? Sign In Here';
       let linkURL = this.state.formType === 'signin' ? 'signup' : 'signin';
-      otherOptionLink = <a onClick={ this.changeFormType.bind(this, linkURL) }>{ linkType }</a>
+      otherOptionLink = <a onClick={ this.changeFormType.bind(this, linkURL) }>
+        { linkType }
+      </a>;
     } else {
       otherOptionLink = null;
     }
 
+    let { isOpen, onRequestClose } = this.props;
+
     return (
       <Modal
-        isOpen={ this.props.isOpen }
-        onRequestClose={ this.props.onRequestClose }
+        isOpen={ isOpen }
+        onRequestClose={ onRequestClose }
         style={ ModalStyle }
         contentLabel="Session Modal"
         >
 
-        <span onClick={ this.props.onRequestClose } className="modal-close">X</span>
+        <span onClick={ onRequestClose } className="modal-close">X</span>
         <ModalSessionFormContainer
           formType={ this.state.formType }
-          modalOff={ this.props.onRequestClose }
+          modalOff={ onRequestClose }
           />
         { otherOptionLink }
       </Modal>

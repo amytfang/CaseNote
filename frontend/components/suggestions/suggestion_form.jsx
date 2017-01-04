@@ -8,7 +8,8 @@ class SuggestionForm extends React.Component {
     this.state = {
       body: "",
       suggestion_type: "other",
-      fullForm: false,
+      formClass: "",
+      // fullForm: false,
       modalOn: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +25,12 @@ class SuggestionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const { body, suggestion_type } = this.state;
-    const suggestion = { body, suggestion_type, annotation_id: this.props.annotationId };
+    const suggestion = {
+      body,
+      suggestion_type,
+      annotation_id: this.props.annotationId
+    };
+
     this.props.createSuggestion(suggestion).then(
       () => this.setState({ body: "", suggestion_type: "" })
     );
@@ -41,12 +47,12 @@ class SuggestionForm extends React.Component {
 
   showFullForm(e) {
     e.preventDefault();
-    this.setState({ fullForm: true });
-    $(".suggestion-form").addClass("full-mode");
+    this.setState({ formClass: "full-mode" });
+    // $(".suggestion-form").addClass("full-mode");
   }
 
   loginButton() {
-    if (this.state.fullForm) {
+    if (this.state.formClass === "full-mode") {
       if (this.props.currentUser) {
         return null;
       } else {
@@ -60,7 +66,7 @@ class SuggestionForm extends React.Component {
   }
 
   typeButtons() {
-    if (this.state.fullForm) {
+    if (this.state.formClass === "full-mode") {
       return(
         <div className="suggestion-form-radios">
           <div className="suggestion-form-radio-option">
@@ -111,7 +117,7 @@ class SuggestionForm extends React.Component {
   }
 
   submitButtons() {
-    if (this.state.fullForm) {
+    if (this.state.formClass === "full-mode") {
       return(
         <button>Submit</button>
       );
@@ -123,17 +129,20 @@ class SuggestionForm extends React.Component {
   render() {
     if (this.props.currentUser) {
       let placeholder;
-      if (!this.state.fullForm) {
+      if (this.state.formClass === "") {
         placeholder = "Suggest an improvement";
       } else {
         placeholder = (this.state.suggestion_type === "other") ?
-        "Suggest an improvement (required)" : "Suggest an improvement (optional)";
+        "Suggest an improvement (required)" :
+        "Suggest an improvement (optional)";
       }
+
+      let formClasses = `suggestion-form ${this.state.formClass}`;
 
       return(
         <div>
           { this.loginButton() }
-          <form onSubmit={ this.handleSubmit } className="suggestion-form">
+          <form onSubmit={ this.handleSubmit } className={ formClasses }>
             { this.typeButtons() }
             <textarea
               value={ this.state.body }
@@ -147,7 +156,10 @@ class SuggestionForm extends React.Component {
     } else {
       return (
         <div>
-          <button className="suggestion-sign-in" onClick={ this.handleLogIn }>Sign In to Make a Suggestion</button>
+          <button className="suggestion-sign-in" onClick={ this.handleLogIn }>
+            Sign In to Make a Suggestion
+          </button>
+
           <ModalWrapper
             isOpen={ this.state.modalOn }
             onRequestClose={ this.modalOff }

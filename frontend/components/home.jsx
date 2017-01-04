@@ -7,12 +7,12 @@ class Home extends React.Component{
     return (
       <div className="landing-page">
         <div className="landing-page-greeting">
-          CaseNote is a crowdsourced collection of court opinions and legal knowledge.
+          CaseNote is a crowdsourced collection
+          of court opinions and legal knowledge.
         </div>
         <SearchContainer />
       </div>
     );
-
   }
 }
 
