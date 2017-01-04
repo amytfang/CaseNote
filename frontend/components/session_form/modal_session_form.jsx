@@ -13,6 +13,7 @@ class ModalSessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
     const user = Object.assign({}, this.state);
     this.props.processForm(user).then(
       () => {

@@ -24,7 +24,7 @@ class OpinionDetailBody extends React.Component{
       selectionRange: null,
       selectionLocation: null,
       selectedAnnotationId: null,
-      clickLocation: null,
+      clickPanel: false,
       editorClass: "",
      };
 
@@ -34,10 +34,10 @@ class OpinionDetailBody extends React.Component{
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSelection = this.handleSelection.bind(this);
     this.displayAnnotation = this.displayAnnotation.bind(this);
-    this.resetListener = this.resetListener.bind(this);
     this.setState = this.setState.bind(this);
     this.setPanel = this.setPanel.bind(this);
     this.buttons = this.buttons.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +49,15 @@ class OpinionDetailBody extends React.Component{
     Array.from(annotations).forEach(el => {
       el.addEventListener("click", this.displayAnnotation);
     });
-    this.resetListener();
+    window.addEventListener("mousedown", this.handleClick, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("mousedown", this.handleClick, false);
+  }
+
+  handleClick(e) {
+    if (!this.state.clickPanel) this.setPanel("opinion");
   }
 
   setPanel(type) {
@@ -65,19 +73,6 @@ class OpinionDetailBody extends React.Component{
         el.addEventListener("click", this.displayAnnotation);
       });
     }
-  }
-
-  resetListener() {
-    $("body").click((e) =>  {
-      if ($(e.target).closest('.ReactModal__Content').length) {
-        return;
-      } else if (!$(e.target).closest('#opinion-detail-main-panel').length &&
-        !$(e.target).hasClass("opinion-annotation")) {
-          if (this.state.panelView !== "opinion") {
-            this.setState({ panelView: "opinion"});
-          }
-        }
-    });
   }
 
   showEditForm() {
@@ -115,13 +110,14 @@ class OpinionDetailBody extends React.Component{
   }
 
   annotationsUnchanged(updatedAnnotations) {
-    const originalAnnotations = toArray(this.props.opinion.annotations).sort((a, b) => {
-      if (a.start_idx < b.start_idx) {
-        return -1;
-      } else if (a.start_idx > b.start_idx) {
-        return 1;
-      } else {
-        return 0;
+    const originalAnnotations = toArray(this.props.opinion.annotations)
+      .sort((a, b) => {
+        if (a.start_idx < b.start_idx) {
+          return -1;
+        } else if (a.start_idx > b.start_idx) {
+          return 1;
+        } else {
+          return 0;
       }});
     for (let i = 0; i < originalAnnotations.length; i++) {
       if (originalAnnotations[i].length !== updatedAnnotations[i].length) {
@@ -141,6 +137,7 @@ class OpinionDetailBody extends React.Component{
 
   handleSubmit(e) {
     e.preventDefault();
+    e.stopPropagation();
     let newContents = this.quill.getContents();
     let newAnnotations = this.parseAnnotations(newContents);
     if (this.annotationsUnchanged(newAnnotations)) {
@@ -152,7 +149,6 @@ class OpinionDetailBody extends React.Component{
           this.hideEditForm();
         });
     } else {
-      //TODO: add error handling
       this.hideEditForm();
       return;
     }
@@ -160,6 +156,7 @@ class OpinionDetailBody extends React.Component{
 
   handleDelete(e) {
     e.preventDefault();
+    e.stopPropagation();
     this.props.deleteOpinion(this.props.opinion.id).then(
       () => this.props.router.push("/index")
     );
@@ -202,6 +199,7 @@ class OpinionDetailBody extends React.Component{
   }
 
   displayAnnotation(e) {
+    e.stopPropagation();
     const locationY = (e.pageY - 400) <= 0 ? 0 : e.pageY - 400;
     this.setState({
       selectedAnnotationId: parseInt(e.target.id),
@@ -265,7 +263,6 @@ class OpinionDetailBody extends React.Component{
           <div id="edit-editor" className={ this.state.editorClass }>
           </div>
           { this.buttons() }
-
           <section className="opinion-comment-section">
             <CommentFormContainer opinionId={this.props.params.opinionId} />
             <CommentIndexContainer comments={this.props.opinion.comments} />
@@ -273,7 +270,8 @@ class OpinionDetailBody extends React.Component{
         </section>
         <aside
           id="opinion-detail-main-panel"
-          className="opinion-detail-main-panel">
+          className="opinion-detail-main-panel"
+          onMouseDown={ e => e.stopPropagation() }>
           { rightPanel }
         </aside>
       </main>

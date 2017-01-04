@@ -53,7 +53,9 @@ class AnnotationDetail extends React.Component {
   }
 
   hideEditForm(e) {
-    if (e) e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     this.quill.setContents(JSON.parse(this.props.annotationDetail.body));
     this.quill.enable(false);
     this.setState({ editorClass: "" });
@@ -142,7 +144,9 @@ class AnnotationDetail extends React.Component {
     };
 
     return (
-      <section className="annotation-detail-view" style={ sectionStyle }>
+      <section
+        className="annotation-detail-view"
+        style={ sectionStyle }>
         <div className="annotation-detail-view-header">
           Annotation by { this.contributors() }
         </div>
