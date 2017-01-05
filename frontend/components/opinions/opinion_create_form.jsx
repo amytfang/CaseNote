@@ -53,7 +53,6 @@ class OpinionCreateForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.clearPriorRange();
     const opinion = {
       case: this.state.case,
       citation: this.state.citation,
