@@ -20,8 +20,13 @@ class AnnotationForm extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearPriorRange();
+  }
+
   handleSubmit(e) {
     e.preventDefault();
+    this.props.clearPriorRange();
     if (this.quill.getText() === "\n") {
       this.props.receiveAnnotationErrors({"body": ["can't be blank"]});
     } else {

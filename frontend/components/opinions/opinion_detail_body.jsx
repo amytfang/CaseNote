@@ -38,6 +38,7 @@ class OpinionDetailBody extends React.Component{
     this.setPanel = this.setPanel.bind(this);
     this.buttons = this.buttons.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clearPriorRange = this.clearPriorRange.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +59,7 @@ class OpinionDetailBody extends React.Component{
 
   handleClick(e) {
     if (!this.state.clickPanel) this.setPanel("opinion");
+    this.clearPriorRange();
   }
 
   setPanel(type) {
@@ -130,8 +132,6 @@ class OpinionDetailBody extends React.Component{
   updateAnnotations(newAnnotations) {
     newAnnotations.forEach((anno) => {
       this.props.editAnnotation(anno);
-      this.quill.formatText(anno.start_idx, anno.length, 'annotation_id', false);
-      this.quill.formatText(anno.start_idx, anno.length, 'background', false);
     });
   }
 
@@ -163,13 +163,23 @@ class OpinionDetailBody extends React.Component{
   }
 
   handleSelection(range, oldRange, source) {
+    this.clearPriorRange();
     if (range && range.length !== 0) {
+      this.quill.formatText(range.index, range.length, "background", "#ffff64");
       const location = this.quill.getBounds(range.index, range.length);
       this.setState({
         selectionRange: range,
         selectionLocation: ((location.top + location.bottom) / 2) - 15,
         panelView: "annoForm"
       });
+    }
+  }
+
+  clearPriorRange() {
+    const selectionRange = this.state.selectionRange;
+    if (selectionRange !== null) {
+      this.quill.removeFormat(selectionRange.index, selectionRange.length);
+      this.setState({ selectionRange: null });
     }
   }
 
@@ -248,7 +258,8 @@ class OpinionDetailBody extends React.Component{
         range={ this.state.selectionRange }
         location={ this.state.selectionLocation }
         opinionId={ opinion.id }
-        setPanel = { this.setPanel } />);
+        setPanel = { this.setPanel }
+        clearPriorRange = { this.clearPriorRange }/>);
     } else if (this.state.panelView === "annoDetail") {
       rightPanel = (<AnnotationDetailContainer
         location={ this.state.selectionLocation }
