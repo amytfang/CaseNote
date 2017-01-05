@@ -163,9 +163,9 @@ class OpinionDetailBody extends React.Component{
   }
 
   handleSelection(range, oldRange, source) {
-    this.clearPriorRange();
-    if (this.isValid(this.quill.getContents(range.index, range.length))) return;
-    if (range && range.length !== 0) {
+    if (!range ||
+      this.isValid(this.quill.getContents(range.index, range.length))) return;
+    if (range.length !== 0) {
       this.quill.formatText(range.index, range.length, "background", "#ffff64");
       const location = this.quill.getBounds(range.index, range.length);
       this.setState({
