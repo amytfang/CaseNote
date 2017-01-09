@@ -4,7 +4,7 @@
 
 [live]: https://casenote.herokuapp.com/#/
 
-CaseNote is a full-stack web application inspired by Genius.  It utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Redux architectural framework on the frontend.
+CaseNote is an app where users can access and contribute to a crowd-sourced collection of court opinions and legal knowledge. The app has a Genius-inspired annotation scheme that allows users to annotate opinions to provide insight and analysis. CaseNote utilizes Ruby on Rails on the backend, a PostgreSQL database, and React.js with a Redux architectural framework on the frontend.
 
 ## Features & Implementation
 
