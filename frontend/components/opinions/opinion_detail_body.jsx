@@ -112,6 +112,7 @@ class OpinionDetailBody extends React.Component{
   }
 
   annotationsUnchanged(updatedAnnotations) {
+    if (!this.props.opinion.annotations) return true;
     const originalAnnotations = toArray(this.props.opinion.annotations)
       .sort((a, b) => {
         if (a.start_idx < b.start_idx) {
