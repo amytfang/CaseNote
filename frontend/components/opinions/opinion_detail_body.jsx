@@ -121,6 +121,7 @@ class OpinionDetailBody extends React.Component{
         } else {
           return 0;
       }});
+    if (updatedAnnotations.length !== originalAnnotations.length) return false;
     for (let i = 0; i < originalAnnotations.length; i++) {
       if (originalAnnotations[i].length !== updatedAnnotations[i].length) {
         return false;
