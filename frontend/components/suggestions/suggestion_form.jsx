@@ -32,7 +32,7 @@ class SuggestionForm extends React.Component {
     };
 
     this.props.createSuggestion(suggestion).then(
-      () => this.setState({ body: "", suggestion_type: "" })
+      () => this.setState({ body: "", suggestion_type: "", formClass: "" })
     );
   }
 
@@ -48,7 +48,6 @@ class SuggestionForm extends React.Component {
   showFullForm(e) {
     e.preventDefault();
     this.setState({ formClass: "full-mode" });
-    // $(".suggestion-form").addClass("full-mode");
   }
 
   loginButton() {
