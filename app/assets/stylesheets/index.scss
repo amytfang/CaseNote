@@ -37,7 +37,7 @@
   object-fit: cover;
 }
 
-.opinion-index-item .cite {
+.opinion-index-item .cite, .opinion-index-item:nth-child(n+10) .cite {
   border: 0;
   padding: 18px;
   margin: 0;
