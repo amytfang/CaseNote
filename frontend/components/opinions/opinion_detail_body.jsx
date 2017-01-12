@@ -253,7 +253,7 @@ class OpinionDetailBody extends React.Component{
       </button>);
 
     if (this.state.editorClass !== "") {
-      return <div> { submitButton } { cancelButton } </div>;
+      return <div> { submitButton } { cancelButton } <span>Note: Edits will <strong>not</strong> save if annotated text is altered</span></div>;
     } else {
       return <div> { editButton } { deleteButton } </div>;
     }
